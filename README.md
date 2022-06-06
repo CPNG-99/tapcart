@@ -1,3 +1,3 @@
-# API - TapCard
+# TapCard
 
 TapCard mobile application.
