@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tapcart/common/constants.dart';
 import 'package:tapcart/common/utils.dart';
+import 'package:tapcart/injection.dart' as di;
 
 void main() {
+  di.init();
   runApp(const MyApp());
 }
 
