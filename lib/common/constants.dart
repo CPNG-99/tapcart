@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 // colors
-const Color kLightBrown = Color(0xFFD4A373);
+const Color kLightBrown = Color(0xFFE1B854);
 const Color kRichBlack = Color(0xFF000814);
+const Color kGrey = Color(0xFFB7B4B4);
 
 // font style
 final TextStyle kHeading = GoogleFonts.inter(
@@ -21,11 +22,11 @@ final kTextTheme =
         .apply(bodyColor: kRichBlack, displayColor: kRichBlack);
 
 const kColorScheme = ColorScheme(
-  primary: kLightBrown,
+  primary: Colors.white,
   primaryContainer: kLightBrown,
-  secondary: kRichBlack,
+  secondary: Colors.white,
   secondaryContainer: Colors.white,
-  surface: Colors.white,
+  surface: kGrey,
   background: Colors.white,
   error: Colors.red,
   onPrimary: kRichBlack,
