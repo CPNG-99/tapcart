@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:tapcart/common/constants.dart';
+import 'package:tapcart/common/routes.dart';
 import 'package:tapcart/common/utils.dart';
 import 'package:tapcart/injection.dart' as di;
+import 'package:tapcart/presentation/bloc/store/storedetail/store_detail_bloc.dart';
 
 void main() {
   di.init();
@@ -15,7 +18,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: const [],
+      providers: [
+        BlocProvider(create: (_) => di.locator<StoreDetailBloc>()),
+      ],
       child: MaterialApp(
           title: 'TapCart',
           theme: ThemeData.light().copyWith(
@@ -29,7 +34,7 @@ class MyApp extends StatelessWidget {
           navigatorObservers: [routeObserver],
           onGenerateRoute: (RouteSettings settings) {
             switch (settings.name) {
-              case "/":
+              case HOME_ROUTE:
                 return MaterialPageRoute(
                     builder: (_) => const Scaffold(
                           body: Center(child: Text("Home")),
