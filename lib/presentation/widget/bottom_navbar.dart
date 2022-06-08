@@ -14,8 +14,8 @@ class BottomNavbar extends StatelessWidget {
     return BottomNavigationBar(
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-        BottomNavigationBarItem(icon: Icon(Icons.qr_code), label: "Scan"),
-        BottomNavigationBarItem(icon: Icon(Icons.history), label: "History"),
+        BottomNavigationBarItem(icon: Icon(Icons.shopping_cart), label: "Active Cart"),
+        BottomNavigationBarItem(icon: Icon(Icons.history), label: "Cart History"),
         BottomNavigationBarItem(icon: Icon(Icons.bookmark), label: "Bookmark"),
       ],
       currentIndex: selectedPageIdx,

@@ -16,7 +16,7 @@ class _BuyerPageState extends State<BuyerPage> {
       child: Text("HOME"),
     ),
     Center(
-      child: Text("SCAN"),
+      child: Text("Active Cart"),
     ),
     Center(
       child: Text("HISTORY"),

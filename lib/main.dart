@@ -7,6 +7,7 @@ import 'package:tapcart/common/utils.dart';
 import 'package:tapcart/injection.dart' as di;
 import 'package:tapcart/presentation/bloc/store/storedetail/store_detail_bloc.dart';
 import 'package:tapcart/presentation/pages/buyer_page.dart';
+import 'package:tapcart/presentation/pages/first_page.dart';
 
 void main() {
   di.init();
@@ -29,12 +30,14 @@ class MyApp extends StatelessWidget {
               primaryColor: kLightBrown,
               scaffoldBackgroundColor: Colors.white,
               textTheme: kTextTheme),
-          home: const BuyerPage(),
+          home: const FirstPage(),
           navigatorObservers: [routeObserver],
           onGenerateRoute: (RouteSettings settings) {
             switch (settings.name) {
               case HOME_ROUTE:
-                return MaterialPageRoute(builder: (_) => const BuyerPage());
+                return MaterialPageRoute(builder: (_) => const FirstPage());
+              case BUYER_PAGE:
+                return MaterialPageRoute(builder: (_)=> const BuyerPage());
               default:
                 return MaterialPageRoute(builder: (_) {
                   return const Scaffold(

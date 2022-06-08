@@ -15,6 +15,8 @@ final TextStyle kSubtitle =
     GoogleFonts.inter(fontSize: 14, fontWeight: FontWeight.w400);
 final TextStyle kBodyText =
     GoogleFonts.inter(fontSize: 14, fontWeight: FontWeight.w400);
+final TextStyle kButtonText =
+    GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.bold);
 
 // text theme
 final kTextTheme =
