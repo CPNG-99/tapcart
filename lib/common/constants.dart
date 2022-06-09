@@ -71,12 +71,12 @@ class MyInputTheme {
     contentPadding: EdgeInsets.all(16),
     floatingLabelBehavior: FloatingLabelBehavior.never,
     constraints: BoxConstraints(maxWidth: 300),
-
     enabledBorder: _outlineInputBorder(kGrey),
     errorBorder: _outlineInputBorder(Colors.red),
     focusedErrorBorder: _outlineInputBorder(Colors.red),
     focusedBorder: _outlineInputBorder(kLightBrown),
     disabledBorder: _outlineInputBorder(Colors.grey[400]!),
-
+    floatingLabelStyle: kSubtitle,
+    hintStyle: const TextStyle(color: kGrey, fontSize: 12)
   );
 }

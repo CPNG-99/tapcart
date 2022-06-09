@@ -4,14 +4,14 @@ import 'package:tapcart/common/routes.dart';
 import 'package:tapcart/presentation/widget/email_textfield.dart';
 import 'package:tapcart/presentation/widget/password_textfield.dart';
 
-class LoginBuyerPage extends StatefulWidget{
-  const LoginBuyerPage({Key? key}) : super(key: key);
+class LoginSellerPage extends StatefulWidget{
+  const LoginSellerPage({Key? key}) : super(key: key);
 
   @override
-  State<LoginBuyerPage> createState() => _LoginBuyerPageState();
+  State<LoginSellerPage> createState() => _LoginSellerPageState();
 }
 
-class _LoginBuyerPageState extends State<LoginBuyerPage> {
+class _LoginSellerPageState extends State<LoginSellerPage> {
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -45,7 +45,7 @@ class _LoginBuyerPageState extends State<LoginBuyerPage> {
                   ),
                   TextButton(
                     onPressed: (){
-                      Navigator.pushNamed(context, BUYER_PAGE);
+                      Navigator.pushNamed(context, REGISTER_SELLER_PAGE);
                     },
                     child: const Text(
                       "Don't have any account?",

@@ -46,11 +46,8 @@ class FirstPage extends StatelessWidget{
                     ),
                     const SizedBox(height: 5,),
                     ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.white
-                      ),
                       onPressed: () {
-                        Navigator.pushNamed(context, BUYER_PAGE);
+                        Navigator.pushNamed(context, LOGIN_SELLER_PAGE);
                       },
                       child: const Text('Seller'),
                     ),
