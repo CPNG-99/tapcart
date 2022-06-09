@@ -31,7 +31,7 @@ final kTextTheme = TextTheme(
 final kButtonThemeData = ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
       primary: kLightBrown,
-      fixedSize: const Size(300, 40),
+      fixedSize: const Size(300, 50),
       padding: const EdgeInsets.symmetric(
           vertical: 10, horizontal: 30),
       textStyle: kButtonText,
@@ -56,3 +56,27 @@ const kColorScheme = ColorScheme(
   onError: Colors.white,
   brightness: Brightness.light,
 );
+
+class MyInputTheme {
+  OutlineInputBorder _outlineInputBorder(Color color){
+    return OutlineInputBorder(
+      borderRadius: BorderRadius.all(Radius.circular(5)),
+      borderSide: BorderSide(
+        color: color,
+        width: 1,
+      ),
+    );
+  }
+  InputDecorationTheme theme() => InputDecorationTheme(
+    contentPadding: EdgeInsets.all(16),
+    floatingLabelBehavior: FloatingLabelBehavior.never,
+    constraints: BoxConstraints(maxWidth: 300),
+
+    enabledBorder: _outlineInputBorder(kGrey),
+    errorBorder: _outlineInputBorder(Colors.red),
+    focusedErrorBorder: _outlineInputBorder(Colors.red),
+    focusedBorder: _outlineInputBorder(kLightBrown),
+    disabledBorder: _outlineInputBorder(Colors.grey[400]!),
+
+  );
+}

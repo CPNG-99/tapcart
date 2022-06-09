@@ -8,6 +8,7 @@ import 'package:tapcart/injection.dart' as di;
 import 'package:tapcart/presentation/bloc/store/storedetail/store_detail_bloc.dart';
 import 'package:tapcart/presentation/pages/buyer_page.dart';
 import 'package:tapcart/presentation/pages/first_page.dart';
+import 'package:tapcart/presentation/pages/login_buyer_page.dart';
 
 void main() {
   di.init();
@@ -27,11 +28,12 @@ class MyApp extends StatelessWidget {
           title: 'TapCart',
           theme: ThemeData.light().copyWith(
             elevatedButtonTheme: kButtonThemeData,
+            inputDecorationTheme: MyInputTheme().theme(),
             colorScheme: kColorScheme,
             primaryColor: kLightBrown,
             scaffoldBackgroundColor: Colors.white,
             textTheme: kTextTheme),
-          home: const FirstPage(),
+          home: const LoginBuyerPage(),
           navigatorObservers: [routeObserver],
           onGenerateRoute: (RouteSettings settings) {
             switch (settings.name) {
