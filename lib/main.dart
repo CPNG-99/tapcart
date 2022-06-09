@@ -8,8 +8,9 @@ import 'package:tapcart/injection.dart' as di;
 import 'package:tapcart/presentation/bloc/store/storedetail/store_detail_bloc.dart';
 import 'package:tapcart/presentation/pages/buyer_page.dart';
 import 'package:tapcart/presentation/pages/first_page.dart';
-import 'package:tapcart/presentation/pages/login_seller_page.dart';
-import 'package:tapcart/presentation/pages/register_seller_page.dart';
+import 'package:tapcart/presentation/pages/seller_login_page.dart';
+import 'package:tapcart/presentation/pages/seller_page.dart';
+import 'package:tapcart/presentation/pages/seller_register_page.dart';
 
 void main() {
   di.init();
@@ -43,7 +44,7 @@ class MyApp extends StatelessWidget {
               case BUYER_PAGE:
                 return MaterialPageRoute(builder: (_)=> const BuyerPage());
               case SELLER_PAGE:
-                return MaterialPageRoute(builder: (_)=> const BuyerPage());
+                return MaterialPageRoute(builder: (_)=> const SellerPage());
               case LOGIN_SELLER_PAGE:
                 return MaterialPageRoute(builder: (_)=> const LoginSellerPage());
               case REGISTER_SELLER_PAGE:

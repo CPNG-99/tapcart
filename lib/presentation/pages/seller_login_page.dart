@@ -40,7 +40,9 @@ class _LoginSellerPageState extends State<LoginSellerPage> {
                       style: TextStyle(color: Colors.white),
                     ),
                     onPressed: () {
-                      if (_formKey.currentState!.validate()) {}
+                      if (_formKey.currentState!.validate()) {
+                        Navigator.pushNamed(context, SELLER_PAGE);
+                      }
                     },
                   ),
                   TextButton(

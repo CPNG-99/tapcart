@@ -42,7 +42,7 @@ final kButtonThemeData = ElevatedButtonThemeData(
 );
 
 const kColorScheme = ColorScheme(
-  primary: Colors.white,
+  primary: kLightBrown,
   primaryContainer: kLightBrown,
   secondary: Colors.white,
   secondaryContainer: Colors.white,
@@ -60,7 +60,7 @@ const kColorScheme = ColorScheme(
 class MyInputTheme {
   OutlineInputBorder _outlineInputBorder(Color color){
     return OutlineInputBorder(
-      borderRadius: BorderRadius.all(Radius.circular(5)),
+      borderRadius: const BorderRadius.all(Radius.circular(5)),
       borderSide: BorderSide(
         color: color,
         width: 1,
@@ -68,9 +68,9 @@ class MyInputTheme {
     );
   }
   InputDecorationTheme theme() => InputDecorationTheme(
-    contentPadding: EdgeInsets.all(16),
+    contentPadding: const EdgeInsets.all(16),
     floatingLabelBehavior: FloatingLabelBehavior.never,
-    constraints: BoxConstraints(maxWidth: 300),
+    constraints: const BoxConstraints(maxWidth: 350),
     enabledBorder: _outlineInputBorder(kGrey),
     errorBorder: _outlineInputBorder(Colors.red),
     focusedErrorBorder: _outlineInputBorder(Colors.red),

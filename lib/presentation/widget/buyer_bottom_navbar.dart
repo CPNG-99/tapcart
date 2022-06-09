@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:tapcart/common/constants.dart';
 
-class BottomNavbar extends StatelessWidget {
+class BuyerBottomNavbar extends StatelessWidget {
   final int selectedPageIdx;
   final void Function(int) onTapNavItem;
 
-  const BottomNavbar(
+  const BuyerBottomNavbar(
       {Key? key, required this.selectedPageIdx, required this.onTapNavItem})
       : super(key: key);
 
