@@ -19,9 +19,27 @@ final TextStyle kButtonText =
     GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.bold);
 
 // text theme
-final kTextTheme =
-    TextTheme(headline5: kHeading, subtitle1: kSubtitle, bodyText2: kBodyText)
-        .apply(bodyColor: kRichBlack, displayColor: kRichBlack);
+final kTextTheme = TextTheme(
+    headline5: kHeading,
+    subtitle1: kSubtitle,
+    bodyText2: kBodyText)
+    .apply(bodyColor: kRichBlack,
+    displayColor: kRichBlack
+);
+
+//elevated button theme data
+final kButtonThemeData = ElevatedButtonThemeData(
+    style: ElevatedButton.styleFrom(
+      primary: kLightBrown,
+      fixedSize: const Size(300, 40),
+      padding: const EdgeInsets.symmetric(
+          vertical: 10, horizontal: 30),
+      textStyle: kButtonText,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(5)
+        )
+    )
+);
 
 const kColorScheme = ColorScheme(
   primary: Colors.white,

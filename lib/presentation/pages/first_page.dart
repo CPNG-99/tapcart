@@ -38,36 +38,23 @@ class FirstPage extends StatelessWidget{
                     const SizedBox(height: 80,),
                     Text("choose your action", style: kSubtitle,),
                     const SizedBox(height: 5,),
-                    SizedBox(
-                        width: 300,
-                        height: 45,
-                      child: TextButton(
-                        style: TextButton.styleFrom(
-                            backgroundColor: kLightBrown),
-                        onPressed: () {
-                          Navigator.pushNamed(context, BUYER_PAGE);
-                        },
-                        child: Text(
-                          "Buyer",
-                          style: kButtonText,
-                        ),
-                      )
+                    ElevatedButton(
+                          onPressed: () {
+                            Navigator.pushNamed(context, BUYER_PAGE);
+                          },
+                        child: const Text('Buyer'),
+                    ),
+                    const SizedBox(height: 5,),
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.white
+                      ),
+                      onPressed: () {
+                        Navigator.pushNamed(context, BUYER_PAGE);
+                      },
+                      child: const Text('Seller'),
                     ),
                     const SizedBox(height: 15,),
-                    SizedBox(
-                      width: 300,
-                      height: 45,
-                      child: TextButton(
-                        style: TextButton.styleFrom(
-                          backgroundColor: kLightBrown,
-                        ),
-                        onPressed: () {},
-                        child: Text(
-                          "Seller",
-                          style: kButtonText,
-                        ),
-                      )
-                    ),
                   ],
                 ),
               ),

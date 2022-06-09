@@ -26,10 +26,11 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
           title: 'TapCart',
           theme: ThemeData.light().copyWith(
-              colorScheme: kColorScheme,
-              primaryColor: kLightBrown,
-              scaffoldBackgroundColor: Colors.white,
-              textTheme: kTextTheme),
+            elevatedButtonTheme: kButtonThemeData,
+            colorScheme: kColorScheme,
+            primaryColor: kLightBrown,
+            scaffoldBackgroundColor: Colors.white,
+            textTheme: kTextTheme),
           home: const FirstPage(),
           navigatorObservers: [routeObserver],
           onGenerateRoute: (RouteSettings settings) {
