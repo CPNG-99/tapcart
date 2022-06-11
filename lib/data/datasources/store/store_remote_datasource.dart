@@ -18,7 +18,8 @@ class StoreRemoteDataSourceImpl implements StoreRemoteDataSource {
 
   @override
   Future<StoreModelData> getStoreDetail(String storeId) async {
-    final response = await client.get(Uri.parse("$BASE_URL/api/v1/stores"));
+    final response =
+        await client.get(Uri.parse("$BASE_URL/api/v1/stores/$storeId"));
 
     if (response.statusCode == 200) {
       return StoreModelData.fromJson(jsonDecode(response.body)["data"]);
