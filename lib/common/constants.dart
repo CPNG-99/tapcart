@@ -6,6 +6,9 @@ import 'package:google_fonts/google_fonts.dart';
 // shared preferences
 const String ACCESS_TOKEN = "ACCESS_TOKEN";
 
+// response
+const CONNECTION_FAILED = "Connection Failed";
+
 // colors
 const Color kLightBrown = Color(0xFFE1B854);
 const Color kRichBlack = Color(0xFF000814);

@@ -6,6 +6,7 @@ import 'package:tapcart/common/routes.dart';
 import 'package:tapcart/common/utils.dart';
 import 'package:tapcart/injection.dart' as di;
 import 'package:tapcart/presentation/bloc/auth/login/login_bloc.dart';
+import 'package:tapcart/presentation/bloc/auth/member_detail/member_detail_bloc.dart';
 import 'package:tapcart/presentation/bloc/product/productlist/product_list_bloc.dart';
 import 'package:tapcart/presentation/bloc/store/storedetail/store_detail_bloc.dart';
 import 'package:tapcart/presentation/pages/buyer_page.dart';
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         BlocProvider(create: (_) => di.locator<LoginBloc>()),
+        BlocProvider(create: (_) => di.locator<MemberDetailBloc>()),
         BlocProvider(create: (_) => di.locator<StoreDetailBloc>()),
         BlocProvider(create: (_) => di.locator<ProductListBloc>()),
       ],
