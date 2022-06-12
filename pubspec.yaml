@@ -23,6 +23,7 @@ dependencies:
   dartz: ^0.10.1
   flutter_svg: ^1.0.3
   shared_preferences: ^2.0.15
+  mobile_scanner: ^2.0.0
 
 dev_dependencies:
   flutter_test:
