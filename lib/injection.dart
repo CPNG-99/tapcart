@@ -14,6 +14,7 @@ import 'package:tapcart/domain/repositories/store/store_repository.dart';
 import 'package:tapcart/domain/usecases/auth/login.dart';
 import 'package:tapcart/domain/usecases/product/get_product_list.dart';
 import 'package:tapcart/domain/usecases/store/get_store_detail.dart';
+import 'package:tapcart/presentation/bloc/auth/login/login_bloc.dart';
 import 'package:tapcart/presentation/bloc/product/productlist/product_list_bloc.dart';
 import 'package:tapcart/presentation/bloc/store/storedetail/store_detail_bloc.dart';
 
@@ -21,6 +22,7 @@ final locator = GetIt.instance;
 
 void init() {
   // bloc
+  locator.registerFactory(() => LoginBloc(locator()));
   locator.registerFactory(() => StoreDetailBloc(locator()));
   locator.registerFactory(() => ProductListBloc(locator()));
 
