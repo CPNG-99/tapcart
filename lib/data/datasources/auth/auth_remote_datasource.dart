@@ -10,7 +10,7 @@ import 'package:tapcart/domain/entities/Auth/auth.dart';
 
 abstract class AuthRemoteDataSource {
   Future<AuthModel> login(LoginDTO payload);
-  Future<StoreModelData> getMemberInfo();
+  Future<StoreModel> getMemberInfo();
 }
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
@@ -35,14 +35,14 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   }
 
   @override
-  Future<StoreModelData> getMemberInfo() async {
+  Future<StoreModel> getMemberInfo() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     final token = pref.getString(ACCESS_TOKEN);
     final response = await client.get(Uri.parse("$BASE_URL/api/v1/users"),
         headers: {"Authorization": "Bearer $token"});
 
     if (response.statusCode == 200) {
-      return StoreModelData.fromJson(jsonDecode(response.body)["data"]);
+      return StoreModel.fromJson(jsonDecode(response.body));
     } else {
       throw ServerException();
     }

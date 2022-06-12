@@ -30,7 +30,7 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<Either<Failure, Store>> getUserInfo() async {
     try {
       final result = await remoteDataSource.getMemberInfo();
-      return Right(result.toEntity());
+      return Right(result.data.toEntity());
     } on ServerException {
       return const Left(ServerFailure(""));
     } on SocketException {

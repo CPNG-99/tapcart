@@ -17,7 +17,7 @@ class StoreModelData extends Equatable {
   final String storeId;
   final String storeName;
   final String storeAddress;
-  final String openHours;
+  final String description;
   final bool isOpen;
   final String qrCode;
 
@@ -25,7 +25,7 @@ class StoreModelData extends Equatable {
       {required this.storeId,
       required this.storeName,
       required this.storeAddress,
-      required this.openHours,
+      required this.description,
       required this.isOpen,
       required this.qrCode});
 
@@ -33,7 +33,7 @@ class StoreModelData extends Equatable {
       storeId: json["store_id"],
       storeName: json["store_name"],
       storeAddress: json["store_address"],
-      openHours: json["open_hours"],
+      description: json["description"],
       isOpen: json["is_open"],
       qrCode: json["qr_code"]);
 
@@ -41,7 +41,7 @@ class StoreModelData extends Equatable {
         "store_id": storeId,
         "store_name": storeName,
         "store_address": storeAddress,
-        "open_hours": openHours,
+        "description": description,
         "is_open": isOpen,
         "qr_code": qrCode,
       };
@@ -50,11 +50,11 @@ class StoreModelData extends Equatable {
       storeId: storeId,
       storeName: storeName,
       storeAddress: storeAddress,
-      openHours: openHours,
+      description: description,
       isOpen: isOpen,
       qrCode: qrCode);
 
   @override
   List<Object?> get props =>
-      [storeId, storeName, storeAddress, openHours, isOpen, qrCode];
+      [storeId, storeName, storeAddress, description, isOpen, qrCode];
 }
