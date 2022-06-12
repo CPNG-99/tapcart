@@ -5,7 +5,7 @@ import 'package:tapcart/common/exception.dart';
 import 'package:tapcart/data/models/store/store_detail_model.dart';
 
 abstract class StoreRemoteDataSource {
-  Future<StoreModelData> getStoreDetail(String storeId);
+  Future<StoreModel> getStoreDetail(String storeId);
 }
 
 class StoreRemoteDataSourceImpl implements StoreRemoteDataSource {
@@ -17,12 +17,12 @@ class StoreRemoteDataSourceImpl implements StoreRemoteDataSource {
   StoreRemoteDataSourceImpl(this.client);
 
   @override
-  Future<StoreModelData> getStoreDetail(String storeId) async {
+  Future<StoreModel> getStoreDetail(String storeId) async {
     final response =
         await client.get(Uri.parse("$BASE_URL/api/v1/stores/$storeId"));
 
     if (response.statusCode == 200) {
-      return StoreModelData.fromJson(jsonDecode(response.body)["data"]);
+      return StoreModel.fromJson(jsonDecode(response.body));
     } else {
       throw ServerException();
     }
