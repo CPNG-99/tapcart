@@ -16,7 +16,7 @@ class StoreRepositoryImpl implements StoreRepository {
   Future<Either<Failure, Store>> getStoreDetail(String storeId) async {
     try {
       final result = await remoteDataSource.getStoreDetail(storeId);
-      return Right(result.toEntity());
+      return Right(result.data.toEntity());
     } on ServerException {
       return const Left(ServerFailure(""));
     } on SocketException {
