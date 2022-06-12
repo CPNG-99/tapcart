@@ -19,7 +19,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       result.fold((failure) {
         emit(LoginError(failure.message));
       }, (data) {
-        HasLoginData(data);
+        emit(HasLoginData(data));
       });
     });
   }

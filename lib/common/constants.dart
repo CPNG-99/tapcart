@@ -19,27 +19,18 @@ final TextStyle kButtonText =
     GoogleFonts.inter(fontSize: 16, fontWeight: FontWeight.bold);
 
 // text theme
-final kTextTheme = TextTheme(
-    headline5: kHeading,
-    subtitle1: kSubtitle,
-    bodyText2: kBodyText)
-    .apply(bodyColor: kRichBlack,
-    displayColor: kRichBlack
-);
+final kTextTheme =
+    TextTheme(headline5: kHeading, subtitle1: kSubtitle, bodyText2: kBodyText)
+        .apply(bodyColor: kRichBlack, displayColor: kRichBlack);
 
 //elevated button theme data
 final kButtonThemeData = ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
-      primary: kLightBrown,
-      fixedSize: const Size(300, 50),
-      padding: const EdgeInsets.symmetric(
-          vertical: 10, horizontal: 30),
-      textStyle: kButtonText,
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(5)
-        )
-    )
-);
+        primary: kLightBrown,
+        fixedSize: const Size(300, 50),
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+        textStyle: kButtonText,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5))));
 
 const kColorScheme = ColorScheme(
   primary: kLightBrown,
@@ -58,7 +49,7 @@ const kColorScheme = ColorScheme(
 );
 
 class MyInputTheme {
-  OutlineInputBorder _outlineInputBorder(Color color){
+  OutlineInputBorder _outlineInputBorder(Color color) {
     return OutlineInputBorder(
       borderRadius: const BorderRadius.all(Radius.circular(5)),
       borderSide: BorderSide(
@@ -67,16 +58,16 @@ class MyInputTheme {
       ),
     );
   }
+
   InputDecorationTheme theme() => InputDecorationTheme(
-    contentPadding: const EdgeInsets.all(16),
-    floatingLabelBehavior: FloatingLabelBehavior.never,
-    constraints: const BoxConstraints(maxWidth: 350),
-    enabledBorder: _outlineInputBorder(kGrey),
-    errorBorder: _outlineInputBorder(Colors.red),
-    focusedErrorBorder: _outlineInputBorder(Colors.red),
-    focusedBorder: _outlineInputBorder(kLightBrown),
-    disabledBorder: _outlineInputBorder(Colors.grey[400]!),
-    floatingLabelStyle: kSubtitle,
-    hintStyle: const TextStyle(color: kGrey, fontSize: 12)
-  );
+      contentPadding: const EdgeInsets.all(16),
+      floatingLabelBehavior: FloatingLabelBehavior.never,
+      constraints: const BoxConstraints(maxWidth: 350),
+      enabledBorder: _outlineInputBorder(kGrey),
+      errorBorder: _outlineInputBorder(Colors.red),
+      focusedErrorBorder: _outlineInputBorder(Colors.red),
+      focusedBorder: _outlineInputBorder(kLightBrown),
+      disabledBorder: _outlineInputBorder(Colors.grey[400]!),
+      floatingLabelStyle: kSubtitle,
+      hintStyle: const TextStyle(color: kGrey, fontSize: 12));
 }

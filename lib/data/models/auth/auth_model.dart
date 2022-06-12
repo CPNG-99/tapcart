@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:tapcart/domain/entities/Auth/auth.dart';
 
 class AuthModel extends Equatable {
   final AuthModelData data;
@@ -22,4 +23,16 @@ class AuthModelData extends Equatable {
 
   @override
   List<Object?> get props => [token];
+}
+
+class LoginModel extends Equatable {
+  final LoginDTO _loginDTO;
+
+  const LoginModel(this._loginDTO);
+
+  Map<String, dynamic> toJson() =>
+      {"email": _loginDTO.email, "password": _loginDTO.password};
+
+  @override
+  List<Object?> get props => [_loginDTO];
 }

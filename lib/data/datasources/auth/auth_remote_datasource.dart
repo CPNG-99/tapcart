@@ -19,8 +19,9 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
   @override
   Future<AuthModel> login(LoginDTO payload) async {
-    final response =
-        await client.post(Uri.parse("$BASE_URL/auth/v1/login"), body: payload);
+    final response = await client.post(Uri.parse("$BASE_URL/auth/v1/login"),
+        headers: {"Content-Type": "application/json"},
+        body: jsonEncode(LoginModel(payload).toJson()));
 
     if (response.statusCode == 200) {
       return AuthModel.fromJson(jsonDecode(response.body));
