@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tapcart/common/constants.dart';
+import 'package:tapcart/common/routes.dart';
+import 'package:tapcart/presentation/bloc/auth/member_detail/member_detail_bloc.dart';
+import 'package:tapcart/presentation/bloc/product/productlist/product_list_bloc.dart';
 import 'package:tapcart/presentation/widget/seller_card_product.dart';
 
-class SellerHomePage extends StatefulWidget{
+class SellerHomePage extends StatefulWidget {
   const SellerHomePage({Key? key}) : super(key: key);
 
   @override
@@ -10,6 +15,16 @@ class SellerHomePage extends StatefulWidget{
 }
 
 class _SellerHomePageState extends State<SellerHomePage> {
+  @override
+  void initState() {
+    super.initState();
+    Future.microtask(
+        () => context.read<MemberDetailBloc>().add(const OnGetMemberDetail()));
+  }
+
+  void _fetchProducts(String storeId) {
+    context.read<ProductListBloc>().add(OnGetProductList(storeId));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +34,7 @@ class _SellerHomePageState extends State<SellerHomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
-          children:  <Widget>[
+          children: <Widget>[
             SafeArea(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -28,38 +43,65 @@ class _SellerHomePageState extends State<SellerHomePage> {
                   ClipRRect(
                     child: Image.asset("assets/img/tapcart.png"),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
+                  BlocBuilder<MemberDetailBloc, MemberDetailState>(
+                      builder: (context, state) {
+                    if (state is MemberDetailLoading) {
+                      return const Center();
+                    } else if (state is HasMemberDetailData) {
+                      _fetchProducts(state.result.storeId);
+
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          Text("Toko Duar", style: kSubtitle,),
-                          Text("Open", style: kSubtitle,),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
+                              Text(
+                                state.result.storeName,
+                                style: kSubtitle,
+                              ),
+                              Text(
+                                state.result.description,
+                                style: kSubtitle,
+                              ),
+                            ],
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(30),
+                            child: Image.asset(
+                              "assets/img/first-screen.jpg",
+                              height: 50,
+                              width: 50,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
                         ],
-                      ),
-                      const SizedBox(width: 10,),
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(30),
-                        child: Image.asset(
-                          "assets/img/first-screen.jpg",
-                          height: 50,
-                          width: 50,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ],
-                  ),
+                      );
+                    } else if (state is MemberDetailError) {
+                      SchedulerBinding.instance.addPostFrameCallback((_) {
+                        Navigator.of(context).pushNamed(HOME_ROUTE);
+                      });
+                    }
+                    return const Center();
+                  }),
                 ],
               ),
             ),
-            const SizedBox(height: 10,),
+            const SizedBox(
+              height: 10,
+            ),
             Center(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Text("Your Product", style: kButtonText,),
+                  Text(
+                    "Your Product",
+                    style: kButtonText,
+                  ),
                   const TextField(
                     cursorColor: Colors.grey,
                     cursorHeight: 20,
@@ -71,22 +113,43 @@ class _SellerHomePageState extends State<SellerHomePage> {
                       hintText: "Search",
                     ),
                   ),
-                  const SizedBox(height: 20,),
-                  Text("Category", style: kSubtitle,),
-                  SizedBox(
-                    width: 400,
-                    child: GridView.count(
-                      scrollDirection: Axis.vertical,
-                      shrinkWrap: true,
-                      crossAxisCount: 2,
-                      children: [
-                        SellerCardProduct(),
-                        SellerCardProduct(),
-                        SellerCardProduct(),
-                        SellerCardProduct(),
-                      ],
-                    ),
+                  const SizedBox(
+                    height: 20,
                   ),
+                  Text(
+                    "Category",
+                    style: kSubtitle,
+                  ),
+                  SizedBox(
+                      width: 400,
+                      child: BlocBuilder<ProductListBloc, ProductListState>(
+                          builder: (context, state) {
+                        if (state is ProductListLoading) {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        } else if (state is HasProductList) {
+                          return GridView.count(
+                              scrollDirection: Axis.vertical,
+                              shrinkWrap: true,
+                              crossAxisCount: 2,
+                              children: state.result
+                                  .map((product) => SellerCardProduct(product))
+                                  .toList());
+                        } else if (state is ProductListError) {
+                          const Center(
+                            child: Text(
+                              "Fail to fetch products",
+                              style: TextStyle(color: Colors.red),
+                            ),
+                          );
+                        } else if (state is ProductListEmpty) {
+                          return const Center(
+                            child: Text("No products yet"),
+                          );
+                        }
+                        return Center();
+                      })),
                 ],
               ),
             ),

@@ -19,7 +19,11 @@ class ProductListBloc extends Bloc<ProductListEvent, ProductListState> {
       result.fold((failure) {
         emit(ProductListError(failure.message));
       }, (data) {
-        HasProductList(data);
+        if (data.isEmpty) {
+          emit(ProductListEmpty());
+        } else {
+          emit(HasProductList(data));
+        }
       });
     });
   }

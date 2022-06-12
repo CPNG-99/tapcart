@@ -32,7 +32,7 @@ class ProductModelData extends Equatable {
 
   factory ProductModelData.fromJson(Map<String, dynamic> json) =>
       ProductModelData(
-          productId: json["product_id"],
+          productId: json["id"],
           productName: json["product_name"],
           image: json["image"],
           price: json["price"],
@@ -40,7 +40,7 @@ class ProductModelData extends Equatable {
           storeId: json["store_id"]);
 
   Map<String, dynamic> toJson() => {
-        "product_id": productId,
+        "id": productId,
         "product_name": productName,
         "image": image,
         "price": price,

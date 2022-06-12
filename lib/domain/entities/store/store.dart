@@ -4,7 +4,7 @@ class Store extends Equatable {
   final String storeId;
   final String storeName;
   final String storeAddress;
-  final String openHours;
+  final String description;
   final bool isOpen;
   final String qrCode;
 
@@ -12,11 +12,11 @@ class Store extends Equatable {
       {required this.storeId,
       required this.storeName,
       required this.storeAddress,
-      required this.openHours,
+      required this.description,
       required this.isOpen,
       required this.qrCode});
 
   @override
   List<Object?> get props =>
-      [storeId, storeName, storeAddress, openHours, isOpen, qrCode];
+      [storeId, storeName, storeAddress, description, isOpen, qrCode];
 }
