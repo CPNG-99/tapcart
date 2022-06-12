@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tapcart/presentation/pages/seller_home_page.dart';
+import 'package:tapcart/presentation/pages/seller_scan_page.dart';
 import 'package:tapcart/presentation/widget/seller_bottom_navbar.dart';
 
 class SellerPage extends StatefulWidget {
@@ -14,9 +15,7 @@ class _SellerPageState extends State<SellerPage> {
 
   static const List<Widget> _pageList = [
     SellerHomePage(),
-    Center(
-      child: Text("Active Cart"),
-    ),
+    SellerScanPage(),
     Center(
       child: Text("HISTORY"),
     ),

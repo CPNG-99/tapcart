@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tapcart/common/constants.dart';
+import 'package:tapcart/presentation/widget/seller_card_product.dart';
 
 class SellerHomePage extends StatefulWidget{
   const SellerHomePage({Key? key}) : super(key: key);
@@ -39,7 +40,7 @@ class _SellerHomePageState extends State<SellerHomePage> {
                       ),
                       const SizedBox(width: 10,),
                       ClipRRect(
-                        borderRadius: new BorderRadius.circular(30),
+                        borderRadius: BorderRadius.circular(30),
                         child: Image.asset(
                           "assets/img/first-screen.jpg",
                           height: 50,
@@ -52,7 +53,7 @@ class _SellerHomePageState extends State<SellerHomePage> {
                 ],
               ),
             ),
-            SizedBox(height: 10,),
+            const SizedBox(height: 10,),
             Center(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -70,11 +71,20 @@ class _SellerHomePageState extends State<SellerHomePage> {
                       hintText: "Search",
                     ),
                   ),
-                  SizedBox(height: 20,),
+                  const SizedBox(height: 20,),
                   Text("Category", style: kSubtitle,),
-                  Container(
-                    child: Center(
-                      child: Text("You don't have any product yet"),
+                  SizedBox(
+                    width: 400,
+                    child: GridView.count(
+                      scrollDirection: Axis.vertical,
+                      shrinkWrap: true,
+                      crossAxisCount: 2,
+                      children: [
+                        SellerCardProduct(),
+                        SellerCardProduct(),
+                        SellerCardProduct(),
+                        SellerCardProduct(),
+                      ],
                     ),
                   ),
                 ],
@@ -83,9 +93,9 @@ class _SellerHomePageState extends State<SellerHomePage> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: const FloatingActionButton(
         onPressed: null,
-        tooltip: 'Camera',
+        tooltip: 'Add Product',
         child: Icon(Icons.add),
         backgroundColor: kLightBrown,
       ),
