@@ -5,6 +5,7 @@ import 'package:tapcart/common/constants.dart';
 import 'package:tapcart/common/routes.dart';
 import 'package:tapcart/common/utils.dart';
 import 'package:tapcart/injection.dart' as di;
+import 'package:tapcart/presentation/bloc/product/productlist/product_list_bloc.dart';
 import 'package:tapcart/presentation/bloc/store/storedetail/store_detail_bloc.dart';
 import 'package:tapcart/presentation/pages/buyer_page.dart';
 import 'package:tapcart/presentation/pages/first_page.dart';
@@ -25,16 +26,17 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         BlocProvider(create: (_) => di.locator<StoreDetailBloc>()),
+        BlocProvider(create: (_) => di.locator<ProductListBloc>()),
       ],
       child: MaterialApp(
           title: 'TapCart',
           theme: ThemeData.light().copyWith(
-            elevatedButtonTheme: kButtonThemeData,
-            inputDecorationTheme: MyInputTheme().theme(),
-            colorScheme: kColorScheme,
-            primaryColor: kLightBrown,
-            scaffoldBackgroundColor: Colors.white,
-            textTheme: kTextTheme),
+              elevatedButtonTheme: kButtonThemeData,
+              inputDecorationTheme: MyInputTheme().theme(),
+              colorScheme: kColorScheme,
+              primaryColor: kLightBrown,
+              scaffoldBackgroundColor: Colors.white,
+              textTheme: kTextTheme),
           home: const FirstPage(),
           navigatorObservers: [routeObserver],
           onGenerateRoute: (RouteSettings settings) {
@@ -42,13 +44,15 @@ class MyApp extends StatelessWidget {
               case HOME_ROUTE:
                 return MaterialPageRoute(builder: (_) => const FirstPage());
               case BUYER_PAGE:
-                return MaterialPageRoute(builder: (_)=> const BuyerPage());
+                return MaterialPageRoute(builder: (_) => const BuyerPage());
               case SELLER_PAGE:
-                return MaterialPageRoute(builder: (_)=> const SellerPage());
+                return MaterialPageRoute(builder: (_) => const SellerPage());
               case LOGIN_SELLER_PAGE:
-                return MaterialPageRoute(builder: (_)=> const LoginSellerPage());
+                return MaterialPageRoute(
+                    builder: (_) => const LoginSellerPage());
               case REGISTER_SELLER_PAGE:
-                return MaterialPageRoute(builder: (_)=> const RegisterSellerPage());
+                return MaterialPageRoute(
+                    builder: (_) => const RegisterSellerPage());
               default:
                 return MaterialPageRoute(builder: (_) {
                   return const Scaffold(

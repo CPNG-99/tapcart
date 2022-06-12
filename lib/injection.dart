@@ -1,6 +1,8 @@
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
+import 'package:tapcart/data/datasources/db/database_helper.dart';
 import 'package:tapcart/data/datasources/product/product_remote_datasource.dart';
+import 'package:tapcart/data/datasources/shared_preference/preference_helper.dart';
 import 'package:tapcart/data/datasources/store/store_remote_datasource.dart';
 import 'package:tapcart/data/repositories/product/product_repository_impl.dart';
 import 'package:tapcart/data/repositories/store/store_repository_impl.dart';
@@ -33,6 +35,11 @@ void init() {
       () => StoreRemoteDataSourceImpl(locator()));
   locator.registerLazySingleton<ProductRemoteDataSource>(
       () => ProductRemoteDataSourceImpl(locator()));
+
+  // helper
+  locator.registerLazySingleton<PreferenceHelper>(
+      () => PreferenceHelper(locator()));
+  locator.registerLazySingleton<DatabaseHelper>(() => DatabaseHelper());
 
   // external
   locator.registerLazySingleton(() => http.Client());
