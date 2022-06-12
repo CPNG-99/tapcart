@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:tapcart/presentation/pages/seller_home_page.dart';
-import 'package:tapcart/presentation/pages/seller_scan_page.dart';
-import 'package:tapcart/presentation/widget/seller_bottom_navbar.dart';
+import 'package:tapcart/presentation/pages/buyer/buyer_active_cart_page.dart';
+import 'package:tapcart/presentation/widget/buyer_bottom_navbar.dart';
 
-class SellerPage extends StatefulWidget {
-  const SellerPage({Key? key}) : super(key: key);
+class BuyerPage extends StatefulWidget {
+  const BuyerPage({Key? key}) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => _SellerPageState();
+  State<StatefulWidget> createState() => _BuyerPageState();
 }
 
-class _SellerPageState extends State<SellerPage> {
-  int _selectedPageIdx = 0;
+class _BuyerPageState extends State<BuyerPage> {
+  int _selectedPageIdx = 1;
 
   static const List<Widget> _pageList = [
-    SellerHomePage(),
-    SellerScanPage(),
+    BuyerActiveCartPage(),
+    Center(
+      child: Text("Lasted Scan"),
+    ),
     Center(
       child: Text("HISTORY"),
     ),
@@ -36,7 +37,7 @@ class _SellerPageState extends State<SellerPage> {
         body: Center(
           child: _pageList.elementAt(_selectedPageIdx),
         ),
-        bottomNavigationBar: SellerBottomNavbar(
+        bottomNavigationBar: BuyerBottomNavbar(
             selectedPageIdx: _selectedPageIdx, onTapNavItem: _onTapNavItem));
   }
 }

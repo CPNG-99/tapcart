@@ -1,6 +1,3 @@
-import 'dart:convert';
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:tapcart/common/constants.dart';
 import 'package:tapcart/domain/entities/product/product.dart';
@@ -34,12 +31,9 @@ class SellerCardProduct extends StatelessWidget {
                   fit: BoxFit.cover,
                   width: MediaQuery.of(context).size.width,
                 )
-                // child: Image.network(
-                //   "https://cdn.discordapp.com/attachments/856786757516918784/984871033486078012/pexels-riccardo-bertolo-4245826.jpg",
-                //   fit: BoxFit.cover,
-                // ),
-                ),
+              ),
           ),
+          SizedBox(height: 10,),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(

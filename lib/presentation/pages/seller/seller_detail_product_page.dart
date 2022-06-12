@@ -2,12 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tapcart/common/constants.dart';
 
-class SellerDetailProduct extends StatefulWidget{
+class SellerDetailProductPage extends StatefulWidget{
+  const SellerDetailProductPage({Key? key}) : super(key: key);
+
   @override
-  State<SellerDetailProduct> createState() => _SellerDetailProductState();
+  State<SellerDetailProductPage> createState() => _SellerDetailProductPageState();
 }
 
-class _SellerDetailProductState extends State<SellerDetailProduct> {
+class _SellerDetailProductPageState extends State<SellerDetailProductPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,6 +49,8 @@ class _SellerDetailProductState extends State<SellerDetailProduct> {
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -55,6 +59,12 @@ class _SellerDetailProductState extends State<SellerDetailProduct> {
                       Text("Rp 10.000", style: kHeading,),
                     ],
                   ),
+                  SizedBox(height: 20,),
+                  Text("Category", style: kButtonText,),
+                  Text("Snack", style: kSubtitle,),
+
+                  SizedBox(height: 20,),
+                  Text("Product Status", style: kButtonText,),
                 ],
               ),
             ),
