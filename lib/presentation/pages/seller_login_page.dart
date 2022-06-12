@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tapcart/common/constants.dart';
 import 'package:tapcart/common/routes.dart';
 import 'package:tapcart/domain/entities/Auth/auth.dart';
@@ -17,12 +18,17 @@ class LoginSellerPage extends StatefulWidget {
 
 class _LoginSellerPageState extends State<LoginSellerPage> {
   final _formKey = GlobalKey<FormState>();
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
 
   void _login(email, password) {
     LoginDTO payload = LoginDTO(email: email, password: password);
     context.read<LoginBloc>().add(OnLogin(payload));
+  }
+
+  void _setToken(token) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    pref.setString(ACCESS_TOKEN, token);
   }
 
   @override
@@ -45,11 +51,11 @@ class _LoginSellerPageState extends State<LoginSellerPage> {
               key: _formKey,
               child: Column(
                 children: [
-                  EmailTextField(controller: emailController),
+                  EmailTextField(controller: _emailController),
                   const SizedBox(
                     height: 10,
                   ),
-                  PasswordTextField(controller: passwordController),
+                  PasswordTextField(controller: _passwordController),
                   const SizedBox(
                     height: 20,
                   ),
@@ -65,7 +71,7 @@ class _LoginSellerPageState extends State<LoginSellerPage> {
                       );
                     } else if (state is HasLoginData) {
                       final token = state.token;
-
+                      _setToken(token);
                       SchedulerBinding.instance.addPostFrameCallback((_) {
                         Navigator.of(context).pushNamed(SELLER_PAGE);
                       });
@@ -74,7 +80,7 @@ class _LoginSellerPageState extends State<LoginSellerPage> {
                         children: const [
                           Center(
                             child: Text(
-                              "error uy",
+                              "Fail to login, please check your email & password",
                               style: TextStyle(color: Colors.red),
                             ),
                           ),
@@ -93,7 +99,7 @@ class _LoginSellerPageState extends State<LoginSellerPage> {
                     ),
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
-                        _login(emailController.text, passwordController.text);
+                        _login(_emailController.text, _passwordController.text);
                         // Navigator.pushNamed(context, SELLER_PAGE);
                       }
                     },

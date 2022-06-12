@@ -1,5 +1,10 @@
+// ignore_for_file: constant_identifier_names
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+// shared preferences
+const String ACCESS_TOKEN = "ACCESS_TOKEN";
 
 // colors
 const Color kLightBrown = Color(0xFFE1B854);
