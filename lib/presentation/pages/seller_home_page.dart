@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tapcart/common/constants.dart';
 import 'package:tapcart/common/routes.dart';
 import 'package:tapcart/presentation/bloc/auth/member_detail/member_detail_bloc.dart';
+import 'package:tapcart/presentation/bloc/product/productlist/product_list_bloc.dart';
 import 'package:tapcart/presentation/widget/seller_card_product.dart';
 
 class SellerHomePage extends StatefulWidget {
@@ -19,6 +20,10 @@ class _SellerHomePageState extends State<SellerHomePage> {
     super.initState();
     Future.microtask(
         () => context.read<MemberDetailBloc>().add(const OnGetMemberDetail()));
+  }
+
+  void _fetchProducts(String storeId) {
+    context.read<ProductListBloc>().add(OnGetProductList(storeId));
   }
 
   @override
@@ -43,6 +48,8 @@ class _SellerHomePageState extends State<SellerHomePage> {
                     if (state is MemberDetailLoading) {
                       return const Center();
                     } else if (state is HasMemberDetailData) {
+                      _fetchProducts(state.result.storeId);
+
                       return Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
@@ -114,19 +121,35 @@ class _SellerHomePageState extends State<SellerHomePage> {
                     style: kSubtitle,
                   ),
                   SizedBox(
-                    width: 400,
-                    child: GridView.count(
-                      scrollDirection: Axis.vertical,
-                      shrinkWrap: true,
-                      crossAxisCount: 2,
-                      children: [
-                        SellerCardProduct(),
-                        SellerCardProduct(),
-                        SellerCardProduct(),
-                        SellerCardProduct(),
-                      ],
-                    ),
-                  ),
+                      width: 400,
+                      child: BlocBuilder<ProductListBloc, ProductListState>(
+                          builder: (context, state) {
+                        if (state is ProductListLoading) {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        } else if (state is HasProductList) {
+                          return GridView.count(
+                              scrollDirection: Axis.vertical,
+                              shrinkWrap: true,
+                              crossAxisCount: 2,
+                              children: state.result
+                                  .map((product) => SellerCardProduct(product))
+                                  .toList());
+                        } else if (state is ProductListError) {
+                          const Center(
+                            child: Text(
+                              "Fail to fetch products",
+                              style: TextStyle(color: Colors.red),
+                            ),
+                          );
+                        } else if (state is ProductListEmpty) {
+                          return const Center(
+                            child: Text("No products yet"),
+                          );
+                        }
+                        return Center();
+                      })),
                 ],
               ),
             ),

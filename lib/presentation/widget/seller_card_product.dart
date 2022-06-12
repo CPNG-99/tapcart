@@ -1,17 +1,23 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:tapcart/common/constants.dart';
+import 'package:tapcart/domain/entities/product/product.dart';
 
-class SellerCardProduct extends StatelessWidget{
+class SellerCardProduct extends StatelessWidget {
+  final Product product;
 
-  // final Product product;
-  //
-  // SellerCardProduct(this.product, {Key? key}) : super(key: key);
+  const SellerCardProduct(this.product, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final UriData? base64Image = Uri.parse(product.image).data;
+    final image = base64Image?.contentAsBytes();
+
     return Card(
       shape: RoundedRectangleBorder(
-        side: BorderSide(color: kGrey, width: 0.2),
+        side: const BorderSide(color: kGrey, width: 0.2),
         borderRadius: BorderRadius.circular(10),
       ),
       shadowColor: kGrey,
@@ -20,12 +26,19 @@ class SellerCardProduct extends StatelessWidget{
         children: <Widget>[
           Expanded(
             child: ClipRRect(
-              borderRadius: BorderRadius.only(topRight: Radius.circular(10), topLeft: Radius.circular(10)),
-              child: Image.network(
-                  "https://cdn.discordapp.com/attachments/856786757516918784/984871033486078012/pexels-riccardo-bertolo-4245826.jpg",
-                fit: BoxFit.cover,
-              ),
-            ),
+                borderRadius: const BorderRadius.only(
+                    topRight: Radius.circular(10),
+                    topLeft: Radius.circular(10)),
+                child: Image.memory(
+                  image!,
+                  fit: BoxFit.cover,
+                  width: MediaQuery.of(context).size.width,
+                )
+                // child: Image.network(
+                //   "https://cdn.discordapp.com/attachments/856786757516918784/984871033486078012/pexels-riccardo-bertolo-4245826.jpg",
+                //   fit: BoxFit.cover,
+                // ),
+                ),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -34,13 +47,14 @@ class SellerCardProduct extends StatelessWidget{
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 Text(
-                  'Farm House Lembang',
-                  style: TextStyle(fontSize: 12),
+                  product.productName,
+                  style: const TextStyle(fontSize: 12),
                 ),
-                SizedBox(
-                  height: 10,
+                const SizedBox(
+                  height: 6,
                 ),
-                Text('Lembang', style: TextStyle(fontSize: 12)),
+                Text(product.price.toString(),
+                    style: const TextStyle(fontSize: 12)),
               ],
             ),
           )
