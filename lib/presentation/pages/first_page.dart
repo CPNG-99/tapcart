@@ -55,19 +55,14 @@ class FirstPage extends StatelessWidget{
                   const SizedBox(height: 5,),
                   ElevatedButton(
                     onPressed: () async {
-                      ElevatedButton(
-                        onPressed: () async {
-                          SharedPreferences pref =
-                          await SharedPreferences.getInstance();
-                          String? token = pref.getString(ACCESS_TOKEN);
-                          if (token != null) {
-                            Navigator.pushNamed(context, SELLER_PAGE);
-                          } else {
-                            Navigator.pushNamed(context, LOGIN_SELLER_PAGE);
-                          }
-                        },
-                        child: const Text('Seller'),
-                      );
+                      SharedPreferences pref =
+                      await SharedPreferences.getInstance();
+                      String? token = pref.getString(ACCESS_TOKEN);
+                      if (token != null) {
+                        Navigator.pushNamed(context, SELLER_PAGE);
+                      } else {
+                        Navigator.pushNamed(context, LOGIN_SELLER_PAGE);
+                      }
                     },
                     child: const Text('Seller'),
                   ),

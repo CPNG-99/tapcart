@@ -67,8 +67,11 @@ class MyApp extends StatelessWidget {
               case BUYER_SUMMARY_CART_PAGE:
                 return MaterialPageRoute(builder: (_)=> const BuyerSummaryCartPage());
               case BUYER_MERCHANT_PAGE:
-                return MaterialPageRoute(builder: (_)=> const BuyerMerchantPage());
-
+                final idMerchant = settings.arguments as String;
+                return MaterialPageRoute(
+                  builder: (_) => BuyerMerchantPage(storeId: idMerchant),
+                  settings: settings,
+                );
               default:
                 return MaterialPageRoute(builder: (_) {
                   return const Scaffold(

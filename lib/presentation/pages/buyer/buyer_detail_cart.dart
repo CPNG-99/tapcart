@@ -39,7 +39,7 @@ class _BuyerDetailCartState extends State<BuyerDetailCart> {
                   ),
                 ),
                 Center(
-                  child: Text("VVXFSHGGDWEYY23YDWAD", style: kSubtitle,),
+                  child: Text("5fd0b08e-e39f-477c-bd1b-e12a4e7cba3e", style: kSubtitle,),
                 ),
                 SizedBox(height: 30,),
                 Card(
@@ -56,7 +56,7 @@ class _BuyerDetailCartState extends State<BuyerDetailCart> {
                         child: ClipRRect(
                           borderRadius: BorderRadius.only(bottomLeft: Radius.circular(5), topLeft: Radius.circular(5)),
                           child: Image.network(
-                            "https://cdn.discordapp.com/attachments/856786757516918784/984871033486078012/pexels-riccardo-bertolo-4245826.jpg",
+                            "https://cdn.discordapp.com/attachments/984772311284584522/985561450414219304/unknown.png",
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -68,7 +68,7 @@ class _BuyerDetailCartState extends State<BuyerDetailCart> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text("Pocky Enak", style: kButtonText,),
-                              Text("Rp75.000", style: kSubtitle,),
+                              Text("23.000", style: kSubtitle,),
                               Align(
                                 alignment: Alignment.bottomRight,
                                 child: counter!=0
@@ -162,11 +162,11 @@ class _BuyerDetailCartState extends State<BuyerDetailCart> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text("Total", style: kButtonText,),
-                      Text("Rp100.000", style: kButtonText,),
+                      Text("46.000", style: kButtonText,),
                     ],
                   ),
                   ElevatedButton(
-                    onPressed: (){},
+                    onPressed: null,
                     child: Center(
                       child: Text("Delete Cart"),
                     )

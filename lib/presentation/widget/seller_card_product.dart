@@ -2,15 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:tapcart/common/constants.dart';
 import 'package:tapcart/domain/entities/product/product.dart';
 
-class SellerCardProduct extends StatelessWidget {
+class SellerCardProduct extends StatefulWidget {
   final Product product;
 
   const SellerCardProduct(this.product, {Key? key}) : super(key: key);
 
   @override
+  State<SellerCardProduct> createState() => _SellerCardProductState();
+}
+
+class _SellerCardProductState extends State<SellerCardProduct> {
+  @override
   Widget build(BuildContext context) {
-    final UriData? base64Image = Uri.parse(product.image).data;
-    final image = base64Image?.contentAsBytes();
+    // final UriData? base64Image = Uri.parse(widget.product.image).data;
+    // final image = base64Image?.contentAsBytes();
 
     return Card(
       shape: RoundedRectangleBorder(
@@ -24,10 +29,10 @@ class SellerCardProduct extends StatelessWidget {
           Expanded(
             child: ClipRRect(
                 borderRadius: const BorderRadius.only(
-                    topRight: Radius.circular(10),
-                    topLeft: Radius.circular(10)),
-                child: Image.memory(
-                  image!,
+                    topRight: Radius.circular(5),
+                    topLeft: Radius.circular(5)),
+                child: Image.network(
+                  widget.product.image,
                   fit: BoxFit.cover,
                   width: MediaQuery.of(context).size.width,
                 )
@@ -41,13 +46,13 @@ class SellerCardProduct extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 Text(
-                  product.productName,
+                  widget.product.productName,
                   style: const TextStyle(fontSize: 12),
                 ),
                 const SizedBox(
                   height: 6,
                 ),
-                Text(product.price.toString(),
+                Text(widget.product.price.toString(),
                     style: const TextStyle(fontSize: 12)),
               ],
             ),

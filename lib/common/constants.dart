@@ -14,6 +14,7 @@ const Color kLightBrown = Color(0xFFE1B854);
 const Color kRichBlack = Color(0xFF000814);
 const Color kGrey = Color(0xFFB7B4B4);
 const Color kGreySoft = Color(0xFFD2D2D2);
+const Color kRed = Color(0xFFFF0000);
 
 
 // font style
@@ -45,7 +46,7 @@ final kTextTheme = TextTheme(
 final kButtonThemeData = ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
       primary: kLightBrown,
-      fixedSize: const Size(300, 50),
+      fixedSize: const Size(350, 50),
       padding: const EdgeInsets.symmetric(
           vertical: 10, horizontal: 30),
       textStyle: kButtonText,

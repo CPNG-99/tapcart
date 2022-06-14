@@ -36,7 +36,7 @@ class _BuyerSummaryCartPageState extends State<BuyerSummaryCartPage> {
                     child: ClipRRect(
                       borderRadius: BorderRadius.only(bottomLeft: Radius.circular(5), topLeft: Radius.circular(5)),
                       child: Image.network(
-                        "https://cdn.discordapp.com/attachments/856786757516918784/984871033486078012/pexels-riccardo-bertolo-4245826.jpg",
+                        "https://cdn.discordapp.com/attachments/984772311284584522/985561450414219304/unknown.png",
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -47,8 +47,8 @@ class _BuyerSummaryCartPageState extends State<BuyerSummaryCartPage> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("Pocky Enak", style: kButtonText,),
-                          Text("Rp75.000", style: kSubtitle,),
+                          Text("Recheesec Nabati Bites", style: kButtonText,),
+                          Text("23.000", style: kSubtitle,),
                           Align(
                             alignment: Alignment.bottomRight,
                             child: counter!=0
@@ -133,26 +133,24 @@ class _BuyerSummaryCartPageState extends State<BuyerSummaryCartPage> {
                 ],
               ),
             ),
-            Center(
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text("Total", style: kButtonText,),
-                      Text("Rp100.000", style: kButtonText,),
-                    ],
-                  ),
-                  ElevatedButton(
-                    onPressed: (){
-                      Navigator.pushNamed(context, BUYER_DETAIL_CART_PAGE);
-                    },
-                    child: Center(
-                      child: Text("Create Cart"),
-                    )
+            Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("Total", style: kButtonText,),
+                    Text("46.000", style: kButtonText,),
+                  ],
+                ),
+                ElevatedButton(
+                  onPressed: (){
+                    Navigator.pushNamed(context, BUYER_DETAIL_CART_PAGE);
+                  },
+                  child: Center(
+                    child: Text("Create Cart"),
                   )
-                ],
-              ),
+                )
+              ],
             ),
           ],
         ),
