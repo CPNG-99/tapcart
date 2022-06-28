@@ -17,32 +17,28 @@ class StoreModelData extends Equatable {
   final String storeId;
   final String storeName;
   final String storeAddress;
-  final String description;
-  final bool isOpen;
+  final String openHours;
   final String qrCode;
 
   const StoreModelData(
       {required this.storeId,
       required this.storeName,
       required this.storeAddress,
-      required this.description,
-      required this.isOpen,
+      required this.openHours,
       required this.qrCode});
 
   factory StoreModelData.fromJson(Map<String, dynamic> json) => StoreModelData(
       storeId: json["store_id"],
       storeName: json["store_name"],
       storeAddress: json["store_address"],
-      description: json["description"],
-      isOpen: json["is_open"],
+      openHours: json["open_hours"],
       qrCode: json["qr_code"]);
 
   Map<String, dynamic> toJson() => {
         "store_id": storeId,
         "store_name": storeName,
         "store_address": storeAddress,
-        "description": description,
-        "is_open": isOpen,
+        "open_hours": openHours,
         "qr_code": qrCode,
       };
 
@@ -50,11 +46,10 @@ class StoreModelData extends Equatable {
       storeId: storeId,
       storeName: storeName,
       storeAddress: storeAddress,
-      description: description,
-      isOpen: isOpen,
+      openHours: openHours,
       qrCode: qrCode);
 
   @override
   List<Object?> get props =>
-      [storeId, storeName, storeAddress, description, isOpen, qrCode];
+      [storeId, storeName, storeAddress, openHours, qrCode];
 }

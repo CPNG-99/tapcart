@@ -1,6 +1,3 @@
-import 'dart:convert';
-import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:tapcart/common/constants.dart';
 import 'package:tapcart/domain/entities/product/product.dart';
@@ -12,7 +9,7 @@ class SellerCardProduct extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final UriData? base64Image = Uri.parse(product.image).data;
+    final UriData? base64Image = Uri.parse(product.image ?? "").data;
     final image = base64Image?.contentAsBytes();
 
     return Card(
@@ -29,11 +26,13 @@ class SellerCardProduct extends StatelessWidget {
                 borderRadius: const BorderRadius.only(
                     topRight: Radius.circular(10),
                     topLeft: Radius.circular(10)),
-                child: Image.memory(
-                  image!,
-                  fit: BoxFit.cover,
-                  width: MediaQuery.of(context).size.width,
-                )
+                child: image != null
+                    ? Image.memory(
+                        image,
+                        fit: BoxFit.cover,
+                        width: MediaQuery.of(context).size.width,
+                      )
+                    : null
                 // child: Image.network(
                 //   "https://cdn.discordapp.com/attachments/856786757516918784/984871033486078012/pexels-riccardo-bertolo-4245826.jpg",
                 //   fit: BoxFit.cover,
