@@ -19,7 +19,7 @@ class StoreDetailBloc extends Bloc<StoreDetailEvent, StoreDetailState> {
       result.fold((failure) {
         emit(StoreDetailError(failure.message));
       }, (data) {
-        HasStoreDetail(data);
+        emit(HasStoreDetail(data));
       });
     });
   }

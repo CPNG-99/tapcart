@@ -34,7 +34,8 @@ class _LoginSellerPageState extends State<LoginSellerPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
+      body: Padding(
+        padding: const EdgeInsets.all(50.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
@@ -59,7 +60,8 @@ class _LoginSellerPageState extends State<LoginSellerPage> {
                   const SizedBox(
                     height: 20,
                   ),
-                  BlocBuilder<LoginBloc, LoginState>(builder: (context, state) {
+                  BlocBuilder<LoginBloc, LoginState>(
+                      builder: (context, state) {
                     if (state is LoginLoading) {
                       return Column(
                         children: const [

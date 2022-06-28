@@ -18,7 +18,7 @@ class _SellerScanPageState extends State<SellerScanPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Mobile Scanner'),
+          title: const Text('Cart Scan'),
           actions: [
             IconButton(
               color: Colors.white,

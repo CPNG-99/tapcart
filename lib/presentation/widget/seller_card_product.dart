@@ -2,14 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:tapcart/common/constants.dart';
 import 'package:tapcart/domain/entities/product/product.dart';
 
-class SellerCardProduct extends StatelessWidget {
+class SellerCardProduct extends StatefulWidget {
   final Product product;
 
   const SellerCardProduct(this.product, {Key? key}) : super(key: key);
 
   @override
+  State<SellerCardProduct> createState() => _SellerCardProductState();
+}
+
+class _SellerCardProductState extends State<SellerCardProduct> {
+  @override
   Widget build(BuildContext context) {
-    final UriData? base64Image = Uri.parse(product.image ?? "").data;
+    final UriData? base64Image = Uri.parse(widget.product.image ?? "").data;
     final image = base64Image?.contentAsBytes();
 
     return Card(
@@ -39,6 +44,9 @@ class SellerCardProduct extends StatelessWidget {
                 // ),
                 ),
           ),
+          SizedBox(
+            height: 10,
+          ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
@@ -46,13 +54,13 @@ class SellerCardProduct extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 Text(
-                  product.productName,
+                  widget.product.productName,
                   style: const TextStyle(fontSize: 12),
                 ),
                 const SizedBox(
                   height: 6,
                 ),
-                Text(product.price.toString(),
+                Text(widget.product.price.toString(),
                     style: const TextStyle(fontSize: 12)),
               ],
             ),
