@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tapcart/common/constants.dart';
 import 'package:tapcart/common/routes.dart';
@@ -37,26 +36,16 @@ class _BuyerMerchantPage extends State<BuyerMerchantPage> {
             SafeArea(
               child: Column(
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      ClipRRect(
-                        child: Image.asset("assets/img/tapcart.png"),
-                      ),
-                    ],
-                  ),
                   BlocBuilder<StoreDetailBloc, StoreDetailState>(
                       builder: (context, state){
-                        if (state is StoreDetailLoading) {
+                        if (state is HasStoreDetail) {
                           return const CircularProgressIndicator();
-                        } else if (state is HasStoreDetail) {
-                          // _fetchProducts(state.result.storeId);
+                        } else if (state is StoreDetailLoading) {
                           return Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Row(
-                                children: [
+                                children: <Widget>[
                                   ClipRRect(
                                     borderRadius: BorderRadius.circular(30),
                                     child: Image.asset(
@@ -67,20 +56,31 @@ class _BuyerMerchantPage extends State<BuyerMerchantPage> {
                                     ),
                                   ),
                                   Column(
-                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      Text(state.result.storeName, style: kSubtitle,),
+                                      Text("state.result.storeName", style: kSubtitle,),
                                       Text("Open", style: kSubtitle,),
                                     ],
                                   ),
                                   const SizedBox(width: 10,),
                                 ],
                               ),
-                              IconButton(
-                                onPressed: (){},
-                                icon: const Icon(
-                                  Icons.bookmark_outline, color: kLightBrown, size: 40,
-                                ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: <Widget>[
+                                  IconButton(
+                                    onPressed: (){},
+                                    icon: const Icon(
+                                      Icons.bookmark_outline, color: kLightBrown, size: 30,
+                                    ),
+                                  ),
+                                  IconButton(
+                                    onPressed: (){},
+                                    icon: const Icon(
+                                      Icons.search, color: kLightBrown, size: 30,
+                                    ),
+                                  ),
+                                ],
                               )
                             ],
                           );
@@ -93,61 +93,40 @@ class _BuyerMerchantPage extends State<BuyerMerchantPage> {
               ),
             ),
             const SizedBox(height: 10,),
-            Center(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Text("Your Product", style: kButtonText,),
-                  const TextField(
-                    cursorColor: Colors.grey,
-                    cursorHeight: 20,
-                    textInputAction: TextInputAction.search,
-                    decoration: InputDecoration(
-                      prefixIcon: Icon(
-                        Icons.search,
-                      ),
-                      hintText: "Search",
-                    ),
-                  ),
-                  const SizedBox(height: 20,),
-                  Text("Category", style: kSubtitle,),
-                  SizedBox(
-                    width: 400,
-                    height: 550,
-                    child: BlocBuilder<ProductListBloc, ProductListState>(
-                        builder: (context, state) {
-                          if (state is ProductListLoading) {
-                            return const Center(
-                              child: CircularProgressIndicator(),
-                            );
-                          } else if (state is HasProductList) {
-                            final data = state.result;
-                            return GridView.builder(
-                                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-                                itemCount: state.result.length,
-                                itemBuilder: (context, index){
-                                  final product = data[index];
-                                  return BuyerCardProduct(product: product);
-                                }
-                            );
-                          } else if (state is ProductListError) {
-                            const Center(
-                              child: Text(
-                                "Fail to fetch products",
-                                style: TextStyle(color: Colors.red),
-                              ),
-                            );
-                          } else if (state is ProductListEmpty) {
-                            return const Center(
-                              child: Text("No products yet"),
-                            );
+            Text("Category", style: kSubtitle,),
+            Expanded(
+              // width: 400,
+              // height: 620,
+              child: BlocBuilder<ProductListBloc, ProductListState>(
+                  builder: (context, state) {
+                    if (state is ProductListLoading) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    } else if (state is HasProductList) {
+                      final data = state.result;
+                      return GridView.builder(
+                          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+                          itemCount: state.result.length,
+                          itemBuilder: (context, index){
+                            final product = data[index];
+                            return BuyerCardProduct(product: product);
                           }
-                          return Center();
-                        }
-                    ),
-                  ),
-                ],
+                      );
+                    } else if (state is ProductListError) {
+                      const Center(
+                        child: Text(
+                          "Fail to fetch products",
+                          style: TextStyle(color: Colors.red),
+                        ),
+                      );
+                    } else if (state is ProductListEmpty) {
+                      return const Center(
+                        child: Text("No products yet"),
+                      );
+                    }
+                    return Center();
+                  }
               ),
             ),
           ],
@@ -155,7 +134,7 @@ class _BuyerMerchantPage extends State<BuyerMerchantPage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: (){
-          Navigator.pushNamed(context, BUYER_SUMMARY_CART_PAGE);
+          Navigator.pushNamed(context, BUYER_SUMMARY_CART_PAGE, arguments: widget.storeId);
         },
         tooltip: 'Summary',
         child: const Icon(Icons.shopping_cart),
