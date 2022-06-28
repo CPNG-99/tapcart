@@ -14,8 +14,8 @@ class SellerCardProduct extends StatefulWidget {
 class _SellerCardProductState extends State<SellerCardProduct> {
   @override
   Widget build(BuildContext context) {
-    // final UriData? base64Image = Uri.parse(widget.product.image).data;
-    // final image = base64Image?.contentAsBytes();
+    final UriData? base64Image = Uri.parse(widget.product.image ?? "").data;
+    final image = base64Image?.contentAsBytes();
 
     return Card(
       shape: RoundedRectangleBorder(
@@ -29,16 +29,24 @@ class _SellerCardProductState extends State<SellerCardProduct> {
           Expanded(
             child: ClipRRect(
                 borderRadius: const BorderRadius.only(
-                    topRight: Radius.circular(5),
-                    topLeft: Radius.circular(5)),
-                child: Image.network(
-                  widget.product.image,
-                  fit: BoxFit.cover,
-                  width: MediaQuery.of(context).size.width,
-                )
-              ),
+                    topRight: Radius.circular(10),
+                    topLeft: Radius.circular(10)),
+                child: image != null
+                    ? Image.memory(
+                        image,
+                        fit: BoxFit.cover,
+                        width: MediaQuery.of(context).size.width,
+                      )
+                    : null
+                // child: Image.network(
+                //   "https://cdn.discordapp.com/attachments/856786757516918784/984871033486078012/pexels-riccardo-bertolo-4245826.jpg",
+                //   fit: BoxFit.cover,
+                // ),
+                ),
           ),
-          SizedBox(height: 10,),
+          SizedBox(
+            height: 10,
+          ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
