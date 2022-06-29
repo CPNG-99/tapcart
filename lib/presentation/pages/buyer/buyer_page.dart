@@ -14,8 +14,8 @@ class _BuyerPageState extends State<BuyerPage> {
   int _selectedPageIdx = 1;
 
   static const List<Widget> _pageList = [
-    // BuyerActiveCartPage(),
-    BuyerMerchantPage(storeId: "5fd0b08e-e39f-477c-bd1b-e12a4e7cba3e"),
+    BuyerActiveCartPage(),
+    // BuyerMerchantPage(storeId: "5fd0b08e-e39f-477c-bd1b-e12a4e7cba3e"),
     Center(
       child: Text("Lasted Scan"),
     ),

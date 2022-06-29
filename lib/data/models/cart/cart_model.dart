@@ -6,7 +6,12 @@ class CartModel extends Equatable {
 
   const CartModel({required this.cart});
 
-  Map<String, dynamic> toJson() => {"products": cart};
+  Map<String, dynamic> toJson() =>
+      {"products": cart.products.map((item) => encodeItem(item)).toList()};
+
+  static Map<String, dynamic> encodeItem(CartItems item) {
+    return {"quantity": item.quantity, "product_id": item.productId};
+  }
 
   @override
   List<Object?> get props => [cart];
@@ -20,7 +25,7 @@ class PurchaseResponseModel extends Equatable {
 
   factory PurchaseResponseModel.fromJson(Map<String, dynamic> json) =>
       PurchaseResponseModel(
-          purchaseId: json["purchase_id"], qrCode: json["qr_code"]);
+          purchaseId: json["purchase_id"], qrCode: json["qrCode"]);
 
   @override
   List<Object?> get props => [purchaseId, qrCode];

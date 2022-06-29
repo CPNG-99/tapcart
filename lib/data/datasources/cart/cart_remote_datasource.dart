@@ -23,8 +23,8 @@ class CartRemoteDataSourceImpl implements CartRemoteDataSource {
         headers: {"Content-Type": "application/json"},
         body: jsonEncode(CartModel(cart: payload).toJson()));
 
-    if (response.statusCode == 200) {
-      return PurchaseResponseModel.fromJson(jsonDecode(response.body));
+    if (response.statusCode == 201) {
+      return PurchaseResponseModel.fromJson(jsonDecode(response.body)["data"]);
     } else {
       throw ServerException();
     }

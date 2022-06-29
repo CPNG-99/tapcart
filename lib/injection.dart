@@ -20,6 +20,7 @@ import 'package:tapcart/domain/usecases/product/get_product_list.dart';
 import 'package:tapcart/domain/usecases/store/get_store_detail.dart';
 import 'package:tapcart/presentation/bloc/auth/login/login_bloc.dart';
 import 'package:tapcart/presentation/bloc/auth/member_detail/member_detail_bloc.dart';
+import 'package:tapcart/presentation/bloc/cart/purchase/purchase_bloc.dart';
 import 'package:tapcart/presentation/bloc/product/productlist/product_list_bloc.dart';
 import 'package:tapcart/presentation/bloc/store/storedetail/store_detail_bloc.dart';
 
@@ -31,6 +32,7 @@ void init() {
   locator.registerFactory(() => MemberDetailBloc(locator()));
   locator.registerFactory(() => StoreDetailBloc(locator()));
   locator.registerFactory(() => ProductListBloc(locator()));
+  locator.registerFactory(() => PurchaseBloc(locator()));
 
   // usecases
   locator.registerLazySingleton(() => Login(locator()));

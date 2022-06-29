@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tapcart/common/constants.dart';
 import 'package:tapcart/common/routes.dart';
 import 'package:tapcart/domain/entities/cart/cart.dart';
-import 'package:tapcart/domain/entities/product/product.dart';
+import 'package:tapcart/presentation/bloc/cart/purchase/purchase_bloc.dart';
 import 'package:tapcart/presentation/widget/buyer_summary_card.dart';
 
 class BuyerSummaryCartPage extends StatefulWidget {
@@ -50,6 +52,19 @@ class _BuyerSummaryCartPageState extends State<BuyerSummaryCartPage> {
             ),
             Column(
               children: [
+                BlocBuilder<PurchaseBloc, PurchaseState>(
+                    builder: (context, state) {
+                  if (state is PurchaseLoading) {
+                    return const CircularProgressIndicator();
+                  } else if (state is HasPurchaseData) {
+                    SchedulerBinding.instance.addPostFrameCallback((_) {
+                      Navigator.of(context).pushNamed(BUYER_DETAIL_CART_PAGE);
+                    });
+                  } else if (state is PurchaseError) {
+                    return Center(child: Text(state.message));
+                  }
+                  return const Center();
+                }),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -65,11 +80,12 @@ class _BuyerSummaryCartPageState extends State<BuyerSummaryCartPage> {
                 ),
                 ElevatedButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, BUYER_DETAIL_CART_PAGE);
+                      Cart payload = Cart(widget.cartItems);
+                      context.read<PurchaseBloc>().add(OnPurchase(payload));
                     },
                     child: const Center(
                       child: Text("Create Cart"),
-                    ))
+                    )),
               ],
             ),
           ],
