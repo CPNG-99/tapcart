@@ -15,6 +15,7 @@ const Color kRichBlack = Color(0xFF000814);
 const Color kGrey = Color(0xFFB7B4B4);
 const Color kGreySoft = Color(0xFFD2D2D2);
 const Color kRed = Color(0xFFFF0000);
+const Color kRedSoft = Color(0xFFDC3F3F);
 
 
 // font style

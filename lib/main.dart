@@ -5,6 +5,7 @@ import 'package:tapcart/common/constants.dart';
 import 'package:tapcart/common/routes.dart';
 import 'package:tapcart/common/utils.dart';
 import 'package:tapcart/domain/entities/cart/cart.dart';
+import 'package:tapcart/domain/entities/product/product.dart';
 import 'package:tapcart/injection.dart' as di;
 import 'package:tapcart/presentation/bloc/auth/login/login_bloc.dart';
 import 'package:tapcart/presentation/bloc/auth/member_detail/member_detail_bloc.dart';
@@ -17,6 +18,7 @@ import 'package:tapcart/presentation/pages/buyer/buyer_page.dart';
 import 'package:tapcart/presentation/pages/buyer/buyer_scan_page.dart';
 import 'package:tapcart/presentation/pages/buyer/buyer_summary_cart_page.dart';
 import 'package:tapcart/presentation/pages/first_page.dart';
+import 'package:tapcart/presentation/pages/seller/seller_detail_product_page.dart';
 import 'package:tapcart/presentation/pages/seller/seller_login_page.dart';
 import 'package:tapcart/presentation/pages/seller/seller_page.dart';
 import 'package:tapcart/presentation/pages/seller/seller_register_page.dart';
@@ -76,6 +78,12 @@ class MyApp extends StatelessWidget {
                           cartItems: cartItems,
                         ),
                     settings: settings);
+              case PRODUCT_DETAIL_PAGE:
+                final product = settings.arguments as Product;
+                return MaterialPageRoute(
+                  builder: (_) => SellerDetailProductPage(product: product),
+                  settings: settings,
+                );
               case BUYER_MERCHANT_PAGE:
                 final idMerchant = settings.arguments as String;
                 return MaterialPageRoute(

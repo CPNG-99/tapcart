@@ -4,6 +4,7 @@ const HOME_ROUTE = "/home";
 const BUYER_PAGE = "/buyer-page";
 const SELLER_PAGE = "/seller-page";
 const LOGIN_SELLER_PAGE = "/login-seller-page";
+const PRODUCT_DETAIL_PAGE = "/product-detail-page";
 const BUYER_SCAN_PAGE = "/buyer-scan-page";
 const REGISTER_SELLER_PAGE = "/register-seller-page";
 const BUYER_DETAIL_CART_PAGE = "/buyer-detail-cart-page";

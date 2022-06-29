@@ -9,22 +9,15 @@ class FirstPage extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children:  <Widget>[
-            SafeArea(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ClipRRect(
-                    child: Image.asset("assets/img/tapcart.png"),
-                  ),
-                )
-            ),
-            const SizedBox(height: 100,),
-            Center(
-              child: ClipRRect(
+      body: Padding(
+        padding: const EdgeInsets.all(35.0),
+        child: Center(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children:  <Widget>[
+              const SizedBox(height: 100,),
+              ClipRRect(
                 child: Image.asset(
                   "assets/img/first-screen.jpg",
                   height: 174,
@@ -33,10 +26,8 @@ class FirstPage extends StatelessWidget{
                   fit: BoxFit.cover,
                 ),
               ),
-            ),
-            const SizedBox(height: 5,),
-            Center(
-              child: Column(
+              const SizedBox(height: 5,),
+              Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -69,8 +60,8 @@ class FirstPage extends StatelessWidget{
                   const SizedBox(height: 15,),
                 ],
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
