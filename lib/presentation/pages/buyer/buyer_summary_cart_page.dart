@@ -1,18 +1,15 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tapcart/common/constants.dart';
 import 'package:tapcart/common/routes.dart';
+import 'package:tapcart/domain/entities/cart/cart.dart';
 import 'package:tapcart/domain/entities/product/product.dart';
-import 'package:tapcart/presentation/bloc/product/productlist/product_list_bloc.dart';
 import 'package:tapcart/presentation/widget/buyer_summary_card.dart';
 
-class BuyerSummaryCartPage extends StatefulWidget{
-  final String idStore;
+class BuyerSummaryCartPage extends StatefulWidget {
+  final List<CartItems> cartItems;
 
-  const BuyerSummaryCartPage({Key? key, required this.idStore}) : super(key: key);
+  const BuyerSummaryCartPage({Key? key, required this.cartItems})
+      : super(key: key);
 
   @override
   State<BuyerSummaryCartPage> createState() => _BuyerSummaryCartPageState();
@@ -23,32 +20,12 @@ class _BuyerSummaryCartPageState extends State<BuyerSummaryCartPage> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() {
-      context.read<ProductListBloc>().add(OnGetProductList(widget.idStore));
-    });
-  }
-
-  void _getItemStatus(productId) async{
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String encodedMap = prefs.getString(productId) ?? "0";
-    Map<String,dynamic> decodedMap = json.decode(encodedMap);
-    int qty = decodedMap["qty"];
-    int price = decodedMap["total"];
-
-    if(encodedMap!="0" && qty!=0){
+    for (var item in widget.cartItems) {
       setState(() {
-        _price = qty*price;
-        print(_price);
+        _price += item.total;
       });
-    }else{
-      _price = 0;
     }
   }
-  // void _getTotalPrice() async{
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   String encodedMap = prefs.getString(productId) ?? "0";
-  // }
-
 
   // late int _counter;
   @override
@@ -63,36 +40,12 @@ class _BuyerSummaryCartPageState extends State<BuyerSummaryCartPage> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Expanded(
-              child: BlocBuilder<ProductListBloc, ProductListState>(
-                  builder: (context, state){
-                    if (state is ProductListLoading) {
-                      return const Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    } else if (state is HasProductList) {
-                      final data = state.result;
-                      return ListView.builder(
-                        itemBuilder: (context, index) {
-                          _getItemStatus(data[index].productId);
-                          final Product product = data[index];
-                          return BuyerSummaryCard(product: product);
-                        },
-                        itemCount: data.length,
-                      );
-                    } else if (state is ProductListError) {
-                      const Center(
-                        child: Text(
-                          "Fail to fetch products",
-                          style: TextStyle(color: Colors.red),
-                        ),
-                      );
-                    } else if (state is ProductListEmpty) {
-                      return const Center(
-                        child: Text("No products yet"),
-                      );
-                    }
-                    return Center();
-                  }
+              child: ListView.builder(
+                itemBuilder: (context, idx) {
+                  final CartItems item = widget.cartItems[idx];
+                  return BuyerSummaryCard(product: item);
+                },
+                itemCount: widget.cartItems.length,
               ),
             ),
             Column(
@@ -100,18 +53,23 @@ class _BuyerSummaryCartPageState extends State<BuyerSummaryCartPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("Total", style: kButtonText,),
-                    Text(_price.toString(), style: kButtonText,),
+                    Text(
+                      "Total",
+                      style: kButtonText,
+                    ),
+                    Text(
+                      _price.toString(),
+                      style: kButtonText,
+                    ),
                   ],
                 ),
                 ElevatedButton(
-                  onPressed: (){
-                    Navigator.pushNamed(context, BUYER_DETAIL_CART_PAGE);
-                  },
-                  child: Center(
-                    child: Text("Create Cart"),
-                  )
-                )
+                    onPressed: () {
+                      Navigator.pushNamed(context, BUYER_DETAIL_CART_PAGE);
+                    },
+                    child: const Center(
+                      child: Text("Create Cart"),
+                    ))
               ],
             ),
           ],

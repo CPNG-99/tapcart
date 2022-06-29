@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tapcart/common/constants.dart';
 import 'package:tapcart/common/routes.dart';
+import 'package:tapcart/domain/entities/cart/cart.dart';
 import 'package:tapcart/presentation/bloc/product/productlist/product_list_bloc.dart';
 import 'package:tapcart/presentation/bloc/store/storedetail/store_detail_bloc.dart';
 import 'package:tapcart/presentation/widget/buyer_card_product.dart';
@@ -15,12 +16,24 @@ class BuyerMerchantPage extends StatefulWidget {
 }
 
 class _BuyerMerchantPage extends State<BuyerMerchantPage> {
+  late Map<String, dynamic> cartItems = {};
+
   @override
   void initState() {
     super.initState();
     Future.microtask(() {
       context.read<ProductListBloc>().add(OnGetProductList(widget.storeId));
       context.read<StoreDetailBloc>().add(OnGetStoreDetail(widget.storeId));
+    });
+  }
+
+  void setCart(CartItems data) {
+    setState(() {
+      if (data.quantity == 0) {
+        cartItems.remove(data.productId);
+      } else {
+        cartItems[data.productId] = data;
+      }
     });
   }
 
@@ -38,9 +51,9 @@ class _BuyerMerchantPage extends State<BuyerMerchantPage> {
                 children: [
                   BlocBuilder<StoreDetailBloc, StoreDetailState>(
                       builder: (context, state) {
-                    if (state is HasStoreDetail) {
+                    if (state is StoreDetailLoading) {
                       return const CircularProgressIndicator();
-                    } else if (state is StoreDetailLoading) {
+                    } else if (state is HasStoreDetail) {
                       return Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -59,11 +72,11 @@ class _BuyerMerchantPage extends State<BuyerMerchantPage> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    "state.result.storeName",
+                                    state.result.storeName,
                                     style: kSubtitle,
                                   ),
                                   Text(
-                                    "Open",
+                                    state.result.openHours ?? "",
                                     style: kSubtitle,
                                   ),
                                 ],
@@ -125,11 +138,12 @@ class _BuyerMerchantPage extends State<BuyerMerchantPage> {
                   return GridView.builder(
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2),
+                              mainAxisExtent: 180, crossAxisCount: 2),
                       itemCount: state.result.length,
                       itemBuilder: (context, index) {
                         final product = data[index];
-                        return BuyerCardProduct(product: product);
+                        return BuyerCardProduct(
+                            product: product, setCart: setCart);
                       });
                 } else if (state is ProductListError) {
                   const Center(
@@ -143,7 +157,7 @@ class _BuyerMerchantPage extends State<BuyerMerchantPage> {
                     child: Text("No products yet"),
                   );
                 }
-                return Center();
+                return const Center();
               }),
             ),
           ],
@@ -151,8 +165,12 @@ class _BuyerMerchantPage extends State<BuyerMerchantPage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+          List<CartItems> items = [];
+          cartItems.forEach((key, value) {
+            items.add(value);
+          });
           Navigator.pushNamed(context, BUYER_SUMMARY_CART_PAGE,
-              arguments: widget.storeId);
+              arguments: items);
         },
         tooltip: 'Summary',
         child: const Icon(Icons.shopping_cart),

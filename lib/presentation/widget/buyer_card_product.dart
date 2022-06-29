@@ -1,15 +1,18 @@
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tapcart/common/constants.dart';
+import 'package:tapcart/domain/entities/cart/cart.dart';
 import 'package:tapcart/domain/entities/product/product.dart';
 
 class BuyerCardProduct extends StatefulWidget {
   final Product product;
+  final void Function(CartItems data) setCart;
 
-  const BuyerCardProduct({Key? key, required this.product}) : super(key: key);
+  const BuyerCardProduct(
+      {Key? key, required this.product, required this.setCart})
+      : super(key: key);
 
   @override
   State<BuyerCardProduct> createState() => _BuyerCardProductState();
@@ -19,18 +22,13 @@ class _BuyerCardProductState extends State<BuyerCardProduct> {
   late int _counter = 0;
 
   void _setQty(quantity) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-
-    Map<String, dynamic> selectedItems = {
-      "prouctId": widget.product.productId,
-      "qty": quantity as int,
-      "total": quantity * widget.product.price,
-    };
-
-    String encodedMap = json.encode(selectedItems);
-    print(encodedMap);
-
-    prefs.setString(widget.product.productId, encodedMap);
+    late CartItems data = CartItems(
+        quantity as int,
+        quantity * widget.product.price,
+        widget.product.productName,
+        widget.product.image ?? "",
+        widget.product.productId);
+    widget.setCart(data);
   }
 
   void _getCounter() async {
@@ -42,14 +40,6 @@ class _BuyerCardProductState extends State<BuyerCardProduct> {
         _counter = decodedMap["qty"];
       });
     }
-    //
-    // print(decodedMap);
-    // print(decodedMap["qty"]);
-  }
-
-  void _removeCart() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.remove(widget.product.productId);
   }
 
   void _incrementCounter() {
@@ -60,17 +50,10 @@ class _BuyerCardProductState extends State<BuyerCardProduct> {
   }
 
   void _decrementCounter() {
-    if (_counter > 1) {
-      setState(() {
-        _counter--;
-        _setQty(_counter);
-      });
-    } else {
-      setState(() {
-        _counter--;
-        _removeCart();
-      });
-    }
+    setState(() {
+      _counter--;
+      _setQty(_counter);
+    });
   }
 
   @override
@@ -78,12 +61,12 @@ class _BuyerCardProductState extends State<BuyerCardProduct> {
     // final UriData? base64Image = Uri.parse(widget.product.image).data;
     // final image = base64Image?.contentAsBytes();
     _getCounter();
-    return Container(
+    return SizedBox(
       height: 500,
       child: Card(
         semanticContainer: true,
         shape: RoundedRectangleBorder(
-          side: BorderSide(color: kGrey, width: 0.2),
+          side: const BorderSide(color: kGrey, width: 0.2),
           borderRadius: BorderRadius.circular(5),
         ),
         shadowColor: kGrey,
@@ -91,13 +74,13 @@ class _BuyerCardProductState extends State<BuyerCardProduct> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Stack(
-              alignment: Alignment(0.9, 1.6),
+              alignment: const Alignment(0.9, 1.6),
               children: [
                 Container(
                   width: MediaQuery.of(context).size.width,
                   height: 100,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(
+                    borderRadius: const BorderRadius.only(
                         topLeft: Radius.circular(5),
                         topRight: Radius.circular(5)),
                     image: DecorationImage(
@@ -118,6 +101,7 @@ class _BuyerCardProductState extends State<BuyerCardProduct> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             GestureDetector(
+                              behavior: HitTestBehavior.translucent,
                               onTap: () {
                                 setState(() {
                                   _decrementCounter();
@@ -130,7 +114,7 @@ class _BuyerCardProductState extends State<BuyerCardProduct> {
                                   borderRadius: BorderRadius.circular(100),
                                   color: kLightBrown,
                                 ),
-                                child: Icon(
+                                child: const Icon(
                                   Icons.remove,
                                   size: 13,
                                   color: Colors.white,
@@ -138,9 +122,11 @@ class _BuyerCardProductState extends State<BuyerCardProduct> {
                               ),
                             ),
                             Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 5),
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 5),
                                 child: Text(_counter.toString())),
                             GestureDetector(
+                              behavior: HitTestBehavior.translucent,
                               onTap: () {
                                 _incrementCounter();
                               },
@@ -151,7 +137,7 @@ class _BuyerCardProductState extends State<BuyerCardProduct> {
                                   borderRadius: BorderRadius.circular(100),
                                   color: kLightBrown,
                                 ),
-                                child: Icon(
+                                child: const Icon(
                                   Icons.add,
                                   size: 13,
                                   color: Colors.white,
@@ -162,6 +148,7 @@ class _BuyerCardProductState extends State<BuyerCardProduct> {
                         ),
                       )
                     : GestureDetector(
+                        behavior: HitTestBehavior.translucent,
                         onTap: () {
                           setState(() {
                             _incrementCounter();
@@ -181,7 +168,7 @@ class _BuyerCardProductState extends State<BuyerCardProduct> {
                               borderRadius: BorderRadius.circular(100),
                               color: kLightBrown,
                             ),
-                            child: Icon(
+                            child: const Icon(
                               Icons.add,
                               size: 13,
                               color: Colors.white,
@@ -191,7 +178,7 @@ class _BuyerCardProductState extends State<BuyerCardProduct> {
                       )
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Padding(
@@ -204,7 +191,7 @@ class _BuyerCardProductState extends State<BuyerCardProduct> {
                     widget.product.productName,
                     style: kTitleCardText,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 5,
                   ),
                   Text(widget.product.price.toString(), style: kSubtitleCard),
