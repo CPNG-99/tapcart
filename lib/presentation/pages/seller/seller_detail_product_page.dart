@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tapcart/common/constants.dart';
+import 'package:tapcart/common/routes.dart';
 
 import '../../../domain/entities/product/product.dart';
 
@@ -131,7 +132,13 @@ class _SellerDetailProductPageState extends State<SellerDetailProductPage> {
                   Row(
                     children: [
                       ElevatedButton(
-                          onPressed: (){},
+                          onPressed: (){
+                            Navigator.pushNamed(
+                              context,
+                              PRODUCT_EDIT_PAGE,
+                              arguments: widget.product
+                            );
+                          },
                           style: ElevatedButton.styleFrom(
                               primary: Colors.white,
                               maximumSize: Size(170, 50)
@@ -149,7 +156,23 @@ class _SellerDetailProductPageState extends State<SellerDetailProductPage> {
                       ),
                       SizedBox(width: 10,),
                       ElevatedButton(
-                          onPressed: (){},
+                          onPressed: ()=> showDialog<String>(
+                            context: context,
+                            builder: (BuildContext context) => AlertDialog(
+                              title: const Text('Caution!'),
+                              content: Text('Would you like to delete this product?', style: kSubtitle,),
+                              actions: <Widget>[
+                                TextButton(
+                                  onPressed: () => Navigator.pop(context, 'Cancel'),
+                                  child: Text('Cancel', style: kButtonText,),
+                                ),
+                                TextButton(
+                                  onPressed: () => Navigator.pop(context, 'Delete'),
+                                  child: Text('Delete', style: kButtonText,),
+                                ),
+                              ],
+                            ),
+                          ),
                           style: ElevatedButton.styleFrom(
                             primary: Colors.white,
                             maximumSize: Size(170, 50),

@@ -18,7 +18,9 @@ import 'package:tapcart/presentation/pages/buyer/buyer_page.dart';
 import 'package:tapcart/presentation/pages/buyer/buyer_scan_page.dart';
 import 'package:tapcart/presentation/pages/buyer/buyer_summary_cart_page.dart';
 import 'package:tapcart/presentation/pages/first_page.dart';
+import 'package:tapcart/presentation/pages/seller/seller_create_product_page.dart';
 import 'package:tapcart/presentation/pages/seller/seller_detail_product_page.dart';
+import 'package:tapcart/presentation/pages/seller/seller_edit_product_page.dart';
 import 'package:tapcart/presentation/pages/seller/seller_login_page.dart';
 import 'package:tapcart/presentation/pages/seller/seller_page.dart';
 import 'package:tapcart/presentation/pages/seller/seller_register_page.dart';
@@ -69,7 +71,7 @@ class MyApp extends StatelessWidget {
               case BUYER_SCAN_PAGE:
                 return MaterialPageRoute(builder: (_) => const BuyerScanPage());
               case BUYER_DETAIL_CART_PAGE:
-                return MaterialPageRoute(builder: (_) => BuyerDetailCart());
+                return MaterialPageRoute(builder: (_) => const BuyerDetailCart());
               case BUYER_SUMMARY_CART_PAGE:
                 final List<CartItems> cartItems =
                     settings.arguments as List<CartItems>;
@@ -88,6 +90,16 @@ class MyApp extends StatelessWidget {
                 final idMerchant = settings.arguments as String;
                 return MaterialPageRoute(
                   builder: (_) => BuyerMerchantPage(storeId: idMerchant),
+                  settings: settings,
+                );
+              case PRODUCT_CREATE_PAGE:
+                return MaterialPageRoute(
+                  builder: (_) => const SellerCreateProductPage(),
+                );
+              case PRODUCT_EDIT_PAGE:
+                final product = settings.arguments as Product;
+                return MaterialPageRoute(
+                  builder: (_) => SellerEditProductPage(product: product),
                   settings: settings,
                 );
               default:

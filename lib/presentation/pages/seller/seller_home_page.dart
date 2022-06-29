@@ -162,8 +162,13 @@ class _SellerHomePageState extends State<SellerHomePage> {
           ),
         ),
       ),
-      floatingActionButton: const FloatingActionButton(
-        onPressed: null,
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){
+          Navigator.pushNamed(
+            context,
+            PRODUCT_CREATE_PAGE,
+          );
+        },
         tooltip: 'Add Product',
         child: Icon(Icons.add),
         backgroundColor: kLightBrown,
