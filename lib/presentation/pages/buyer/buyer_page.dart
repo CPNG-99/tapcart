@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tapcart/presentation/pages/buyer/buyer_active_cart_page.dart';
+import 'package:tapcart/presentation/pages/buyer/buyer_merchant_page.dart';
 import 'package:tapcart/presentation/widget/buyer_bottom_navbar.dart';
 
 class BuyerPage extends StatefulWidget {
@@ -14,6 +15,7 @@ class _BuyerPageState extends State<BuyerPage> {
 
   static const List<Widget> _pageList = [
     BuyerActiveCartPage(),
+    // BuyerMerchantPage(storeId: "5fd0b08e-e39f-477c-bd1b-e12a4e7cba3e"),
     Center(
       child: Text("Lasted Scan"),
     ),
