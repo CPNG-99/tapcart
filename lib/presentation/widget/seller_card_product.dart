@@ -16,7 +16,6 @@ class _SellerCardProductState extends State<SellerCardProduct> {
   @override
   Widget build(BuildContext context) {
     // final UriData? base64Image = Uri.parse(widget.product.image ?? "").data;
-    final image = widget.product.image;
     // base64Image?.contentAsBytes()
     return InkWell(
       onTap: () {
@@ -36,21 +35,19 @@ class _SellerCardProductState extends State<SellerCardProduct> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Expanded(
-              child: ClipRRect(
+              child: Container(
+                decoration: BoxDecoration(
                   borderRadius: const BorderRadius.only(
-                      topRight: Radius.circular(10),
-                      topLeft: Radius.circular(10)),
-                  // child: image != null
-                  //     ? Image.memory(
-                  //         image,
-                  //         fit: BoxFit.cover,
-                  //         width: MediaQuery.of(context).size.width,
-                  //       )
-                  //     : null
-                  child: Image.network(
-                    image ?? "0",
+                      topLeft: Radius.circular(5),
+                      topRight: Radius.circular(5)),
+                  image: DecorationImage(
+                    alignment: Alignment.center,
                     fit: BoxFit.cover,
+                    image: NetworkImage(
+                      widget.product.image ?? "0",
+                    ),
                   ),
+                ),
               ),
             ),
             SizedBox(

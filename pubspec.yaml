@@ -24,6 +24,7 @@ dependencies:
   flutter_svg: ^1.0.3
   shared_preferences: ^2.0.15
   mobile_scanner: ^2.0.0
+  image_picker: ^0.8.5+3
 
 dev_dependencies:
   flutter_test:

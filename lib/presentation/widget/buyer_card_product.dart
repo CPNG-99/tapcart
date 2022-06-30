@@ -74,110 +74,111 @@ class _BuyerCardProductState extends State<BuyerCardProduct> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Stack(
-              alignment: const Alignment(0.9, 1.6),
-              children: [
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: 100,
-                  decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(5),
-                        topRight: Radius.circular(5)),
-                    image: DecorationImage(
-                      fit: BoxFit.fill,
-                      image: NetworkImage(widget.product.image ?? ""),
+            Expanded(
+              child: Stack(
+                alignment: const Alignment(0.9, 1.6),
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(5),
+                          topRight: Radius.circular(5)),
+                      image: DecorationImage(
+                        alignment: Alignment.center,
+                        fit: BoxFit.fill,
+                        image: NetworkImage(widget.product.image ?? ""),
+                      ),
                     ),
                   ),
-                ),
-                _counter != 0
-                    ? Container(
-                        height: 35,
-                        width: 90,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(25),
-                          color: kGreySoft.withOpacity(0.8),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            GestureDetector(
-                              behavior: HitTestBehavior.translucent,
-                              onTap: () {
-                                setState(() {
-                                  _decrementCounter();
-                                });
-                              },
-                              child: Container(
-                                height: 30,
-                                width: 30,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(100),
-                                  color: kLightBrown,
-                                ),
-                                child: const Icon(
-                                  Icons.remove,
-                                  size: 13,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                            Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 5),
-                                child: Text(_counter.toString())),
-                            GestureDetector(
-                              behavior: HitTestBehavior.translucent,
-                              onTap: () {
-                                _incrementCounter();
-                              },
-                              child: Container(
-                                height: 30,
-                                width: 30,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(100),
-                                  color: kLightBrown,
-                                ),
-                                child: const Icon(
-                                  Icons.add,
-                                  size: 13,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      )
-                    : GestureDetector(
-                        behavior: HitTestBehavior.translucent,
-                        onTap: () {
-                          setState(() {
-                            _incrementCounter();
-                          });
-                        },
-                        child: Container(
+                  _counter != 0
+                      ? Container(
                           height: 35,
-                          width: 35,
+                          width: 90,
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(100),
+                            borderRadius: BorderRadius.circular(25),
                             color: kGreySoft.withOpacity(0.8),
                           ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              GestureDetector(
+                                behavior: HitTestBehavior.translucent,
+                                onTap: () {
+                                  setState(() {
+                                    _decrementCounter();
+                                  });
+                                },
+                                child: Container(
+                                  height: 30,
+                                  width: 30,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(100),
+                                    color: kLightBrown,
+                                  ),
+                                  child: const Icon(
+                                    Icons.remove,
+                                    size: 13,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(horizontal: 5),
+                                  child: Text(_counter.toString())),
+                              GestureDetector(
+                                behavior: HitTestBehavior.translucent,
+                                onTap: () {
+                                  _incrementCounter();
+                                },
+                                child: Container(
+                                  height: 30,
+                                  width: 30,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(100),
+                                    color: kLightBrown,
+                                  ),
+                                  child: const Icon(
+                                    Icons.add,
+                                    size: 13,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                      : GestureDetector(
+                          behavior: HitTestBehavior.translucent,
+                          onTap: () {
+                            setState(() {
+                              _incrementCounter();
+                            });
+                          },
                           child: Container(
-                            height: 30,
-                            width: 30,
+                            height: 35,
+                            width: 35,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(100),
-                              color: kLightBrown,
+                              color: kGreySoft.withOpacity(0.8),
                             ),
-                            child: const Icon(
-                              Icons.add,
-                              size: 13,
-                              color: Colors.white,
+                            child: Container(
+                              height: 30,
+                              width: 30,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(100),
+                                color: kLightBrown,
+                              ),
+                              child: const Icon(
+                                Icons.add,
+                                size: 13,
+                                color: Colors.white,
+                              ),
                             ),
                           ),
-                        ),
-                      )
-              ],
+                        )
+                ],
+              ),
             ),
             const SizedBox(
               height: 10,
