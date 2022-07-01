@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tapcart/presentation/pages/buyer/buyer_active_cart_page.dart';
-import 'package:tapcart/presentation/pages/buyer/buyer_merchant_page.dart';
+// import 'package:tapcart/presentation/pages/buyer/buyer_merchant_page.dart';
 import 'package:tapcart/presentation/widget/buyer_bottom_navbar.dart';
 
 class BuyerPage extends StatefulWidget {
@@ -11,7 +11,7 @@ class BuyerPage extends StatefulWidget {
 }
 
 class _BuyerPageState extends State<BuyerPage> {
-  int _selectedPageIdx = 1;
+  int _selectedPageIdx = 0;
 
   static const List<Widget> _pageList = [
     BuyerActiveCartPage(),
