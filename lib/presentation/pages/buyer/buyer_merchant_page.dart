@@ -138,8 +138,7 @@ class _BuyerMerchantPage extends State<BuyerMerchantPage> {
                   return GridView.builder(
                       gridDelegate:
                           const SliverGridDelegateWithMaxCrossAxisExtent(
-                              maxCrossAxisExtent: 200,
-                              mainAxisExtent: 200),
+                              maxCrossAxisExtent: 200, mainAxisExtent: 200),
                       itemCount: state.result.length,
                       itemBuilder: (context, index) {
                         final product = data[index];

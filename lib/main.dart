@@ -71,7 +71,12 @@ class MyApp extends StatelessWidget {
               case BUYER_SCAN_PAGE:
                 return MaterialPageRoute(builder: (_) => const BuyerScanPage());
               case BUYER_DETAIL_CART_PAGE:
-                return MaterialPageRoute(builder: (_) => const BuyerDetailCart());
+                BuyerDetailCartArgs args =
+                    settings.arguments as BuyerDetailCartArgs;
+                return MaterialPageRoute(
+                    builder: (_) => BuyerDetailCart(
+                          args: args,
+                        ));
               case BUYER_SUMMARY_CART_PAGE:
                 final List<CartItems> cartItems =
                     settings.arguments as List<CartItems>;
