@@ -11,7 +11,6 @@ abstract class ProductRemoteDataSource {
 class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
   // ignore: constant_identifier_names
   static const BASE_URL = "https://api-tapcart.herokuapp.com";
-
   final http.Client client;
 
   ProductRemoteDataSourceImpl(this.client);

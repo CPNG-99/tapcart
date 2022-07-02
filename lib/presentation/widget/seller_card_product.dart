@@ -15,8 +15,9 @@ class SellerCardProduct extends StatefulWidget {
 class _SellerCardProductState extends State<SellerCardProduct> {
   @override
   Widget build(BuildContext context) {
-    // final UriData? base64Image = Uri.parse(widget.product.image ?? "").data;
-    // base64Image?.contentAsBytes()
+    final UriData? base64Image = Uri.parse(widget.product.image ?? "").data;
+    final image = base64Image?.contentAsBytes();
+
     return InkWell(
       onTap: () {
         Navigator.pushNamed(
@@ -43,9 +44,7 @@ class _SellerCardProductState extends State<SellerCardProduct> {
                   image: DecorationImage(
                     alignment: Alignment.center,
                     fit: BoxFit.cover,
-                    image: NetworkImage(
-                      widget.product.image ?? "0",
-                    ),
+                    image: MemoryImage(image!)
                   ),
                 ),
               ),

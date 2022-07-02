@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tapcart/common/constants.dart';
@@ -20,6 +19,7 @@ class BuyerCardProduct extends StatefulWidget {
 
 class _BuyerCardProductState extends State<BuyerCardProduct> {
   late int _counter = 0;
+
 
   void _setQty(quantity) async {
     late CartItems data = CartItems(
@@ -92,7 +92,7 @@ class _BuyerCardProductState extends State<BuyerCardProduct> {
                         //     image: DecorationImage(
                         //       alignment: Alignment.center,
                         //       fit: BoxFit.fill,
-                        //       image: NetworkImage(widget.product.image ?? ""),
+                        //       image: MemoryImage(image),
                         //     ),
                         //   ),
                         // ),
