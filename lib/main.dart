@@ -26,8 +26,11 @@ import 'package:tapcart/presentation/pages/seller/home/seller_detail_product_pag
 import 'package:tapcart/presentation/pages/seller/home/seller_edit_product_page.dart';
 import 'package:tapcart/presentation/pages/seller/auth/seller_login_page.dart';
 import 'package:tapcart/presentation/pages/seller/profile/seller_edit_profile_page.dart';
+import 'package:tapcart/presentation/pages/seller/profile/seller_profile_qr_page.dart';
 import 'package:tapcart/presentation/pages/seller/seller_page.dart';
 import 'package:tapcart/presentation/pages/seller/auth/seller_register_page.dart';
+
+import 'domain/entities/store/store.dart';
 
 void main() {
   di.init();
@@ -116,6 +119,12 @@ class MyApp extends StatelessWidget {
                 );
               case SELLER_EDIT_PROFILE_PAGE:
                 return MaterialPageRoute(builder: (_) => const SellerEditProfilePage());
+              case SELLER_PROFILE_QR_PAGE:
+                final store = settings.arguments as Store;
+                return MaterialPageRoute(
+                  builder: (_) => SellerProfileQrPage(store: store),
+                  settings: settings,
+                );
               default:
                 return MaterialPageRoute(builder: (_) {
                   return const Scaffold(
