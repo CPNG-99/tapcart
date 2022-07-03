@@ -1,21 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:tapcart/common/constants.dart';
-import 'package:tapcart/domain/entities/cart/cart.dart';
+import 'package:tapcart/domain/entities/cart/get_cart.dart';
 
-class BuyerSummaryCard extends StatefulWidget {
-  final CartItems product;
+class SellerScanCartCard extends StatefulWidget {
+  final GetCartItems cartItems;
 
-  const BuyerSummaryCard({Key? key, required this.product}) : super(key: key);
+  const SellerScanCartCard({Key? key, required this.cartItems}) : super(key: key);
 
   @override
-  State<BuyerSummaryCard> createState() => _BuyerSummaryCardState();
+  State<SellerScanCartCard> createState() => _SellerScanCartCard();
 }
 
-class _BuyerSummaryCardState extends State<BuyerSummaryCard> {
+class _SellerScanCartCard extends State<SellerScanCartCard> {
   @override
   Widget build(BuildContext context) {
-    final UriData? base64Image = Uri.parse(widget.product.image).data;
-    final image = base64Image?.contentAsBytes();
     return Card(
       shape: RoundedRectangleBorder(
         side: const BorderSide(color: kGrey, width: 0.2),
@@ -30,8 +28,8 @@ class _BuyerSummaryCardState extends State<BuyerSummaryCard> {
             child: ClipRRect(
               borderRadius: const BorderRadius.only(
                   bottomLeft: Radius.circular(5), topLeft: Radius.circular(5)),
-              child: Image.memory(
-                image!,
+              child: Image.network(
+                widget.cartItems.image,
                 fit: BoxFit.cover,
               ),
             ),
@@ -43,11 +41,11 @@ class _BuyerSummaryCardState extends State<BuyerSummaryCard> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    widget.product.productName,
+                    widget.cartItems.productName,
                     style: kButtonText,
                   ),
                   Text(
-                    widget.product.total.toString(),
+                    widget.cartItems.price.toString(),
                     style: kSubtitle,
                   ),
                   Align(
@@ -64,9 +62,9 @@ class _BuyerSummaryCardState extends State<BuyerSummaryCard> {
                           children: [
                             Padding(
                                 padding:
-                                    const EdgeInsets.symmetric(horizontal: 2),
+                                const EdgeInsets.symmetric(horizontal: 2),
                                 child:
-                                    Text(widget.product.quantity.toString())),
+                                Text(widget.cartItems.quantity.toString())),
                           ],
                         ),
                       ))

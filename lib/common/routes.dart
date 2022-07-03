@@ -14,5 +14,6 @@ const BUYER_DETAIL_CART_PAGE = "/buyer-detail-cart-page";
 const BUYER_SUMMARY_CART_PAGE = "/buyer-summary-cart-page";
 const BUYER_MERCHANT_PAGE = "/buyer-merchant-page";
 const SELLER_PROFILE_QR_PAGE = "/seller-profile-qr";
+const SELLER_SCAN_CART_PAGE = "/seller-scan-cart-page";
 
 

@@ -34,32 +34,29 @@ class _SellerProfilePageState extends State<SellerProfilePage> {
               return const Center(child: CircularProgressIndicator());
             } else if (state is HasMemberDetailData) {
               Store store = state.result;
-              // final _image = base64Decode(state.result. ?? "");
-              // final _imageQR = base64Decode(state.result.qrCode);
+              final UriData? base64Image = Uri.parse(store.image).data;
+              final image = base64Image?.contentAsBytes();
               return Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SizedBox(height: 50,),
                   Center(
-                    child: Stack(
-                        children: [
-                          Container(
-                            height: 120,
-                            width: 120,
-                            decoration: BoxDecoration(
-                              border: Border.all(color: kGreySoft),
-                              borderRadius: BorderRadius.circular(100),
-                              image: const DecorationImage(
-                                alignment: Alignment.center,
-                                fit: BoxFit.fill,
-                                image: AssetImage(
-                                    "assets/img/tapcart-medium.png"
-                                ),
-                              ),
-                            ),
+                    child:
+                    Container(
+                      height: 120,
+                      width: 120,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: kGreySoft),
+                        borderRadius: BorderRadius.circular(100),
+                        image: DecorationImage(
+                          alignment: Alignment.center,
+                          fit: BoxFit.fill,
+                          image: MemoryImage(
+                              image!
                           ),
-                        ]
+                        ),
+                      ),
                     ),
                   ),
                   SizedBox(height: 20,),

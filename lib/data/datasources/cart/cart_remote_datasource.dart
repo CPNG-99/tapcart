@@ -7,6 +7,7 @@ import 'package:tapcart/domain/entities/cart/cart.dart';
 
 abstract class CartRemoteDataSource {
   Future<PurchaseResponseModel> purchase(Cart payload);
+  Future<ScanCartModel> getScanCart(String purchaseId);
 }
 
 class CartRemoteDataSourceImpl implements CartRemoteDataSource {
@@ -25,6 +26,18 @@ class CartRemoteDataSourceImpl implements CartRemoteDataSource {
 
     if (response.statusCode == 201) {
       return PurchaseResponseModel.fromJson(jsonDecode(response.body)["data"]);
+    } else {
+      throw ServerException();
+    }
+  }
+
+  @override
+  Future<ScanCartModel> getScanCart(String purchaseId) async {
+    final response = await client
+        .get(Uri.parse("$BASE_URL/api/v1/purchases/$purchaseId"));
+
+    if (response.statusCode == 200) {
+      return ScanCartModel.fromJson(jsonDecode(response.body));
     } else {
       throw ServerException();
     }

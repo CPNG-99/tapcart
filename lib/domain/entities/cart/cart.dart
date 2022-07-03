@@ -24,11 +24,11 @@ class CartItems extends Equatable {
 }
 
 class PostCartResponse extends Equatable {
-  final String purhaseId;
+  final String purchaseId;
   final String qrCode;
 
-  const PostCartResponse(this.purhaseId, this.qrCode);
+  const PostCartResponse(this.purchaseId, this.qrCode);
 
   @override
-  List<Object?> get props => [purhaseId, qrCode];
+  List<Object?> get props => [purchaseId, qrCode];
 }

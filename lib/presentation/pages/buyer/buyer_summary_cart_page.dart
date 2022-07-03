@@ -59,7 +59,7 @@ class _BuyerSummaryCartPageState extends State<BuyerSummaryCartPage> {
                     return const CircularProgressIndicator();
                   } else if (state is HasPurchaseData) {
                     final BuyerDetailCartArgs args = BuyerDetailCartArgs(
-                        state.data.purhaseId, state.data.qrCode, _price);
+                        state.data.purchaseId, state.data.qrCode, _price);
                     SchedulerBinding.instance.addPostFrameCallback((_) {
                       Navigator.of(context)
                           .pushNamed(BUYER_DETAIL_CART_PAGE, arguments: args);

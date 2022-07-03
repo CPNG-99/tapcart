@@ -9,6 +9,7 @@ import 'package:tapcart/domain/entities/product/product.dart';
 import 'package:tapcart/injection.dart' as di;
 import 'package:tapcart/presentation/bloc/auth/login/login_bloc.dart';
 import 'package:tapcart/presentation/bloc/auth/member_detail/member_detail_bloc.dart';
+import 'package:tapcart/presentation/bloc/cart/get_scan_cart/get_scan_cart_bloc.dart';
 import 'package:tapcart/presentation/bloc/cart/purchase/purchase_bloc.dart';
 import 'package:tapcart/presentation/bloc/product/create_product/create_product_bloc.dart';
 import 'package:tapcart/presentation/bloc/product/delete_product/delete_product_bloc.dart';
@@ -27,6 +28,7 @@ import 'package:tapcart/presentation/pages/seller/home/seller_edit_product_page.
 import 'package:tapcart/presentation/pages/seller/auth/seller_login_page.dart';
 import 'package:tapcart/presentation/pages/seller/profile/seller_edit_profile_page.dart';
 import 'package:tapcart/presentation/pages/seller/profile/seller_profile_qr_page.dart';
+import 'package:tapcart/presentation/pages/seller/scan/seller_cart_scan_page.dart';
 import 'package:tapcart/presentation/pages/seller/seller_page.dart';
 import 'package:tapcart/presentation/pages/seller/auth/seller_register_page.dart';
 
@@ -52,6 +54,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => di.locator<CreateProductBloc>()),
         BlocProvider(create: (_) => di.locator<UpdateProductBloc>()),
         BlocProvider(create: (_) => di.locator<DeleteProductBloc>()),
+        BlocProvider(create: (_)=> di.locator<GetScanCartBloc>()),
       ],
       child: MaterialApp(
           title: 'TapCart',
@@ -123,6 +126,12 @@ class MyApp extends StatelessWidget {
                 final store = settings.arguments as Store;
                 return MaterialPageRoute(
                   builder: (_) => SellerProfileQrPage(store: store),
+                  settings: settings,
+                );
+              case SELLER_SCAN_CART_PAGE:
+                final purchaseId = settings.arguments as String;
+                return MaterialPageRoute(
+                  builder: (_) => SellerCartScanPage(purchaseId: purchaseId),
                   settings: settings,
                 );
               default:

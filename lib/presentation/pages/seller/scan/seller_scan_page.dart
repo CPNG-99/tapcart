@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:tapcart/common/constants.dart';
+import 'package:tapcart/common/routes.dart';
 import 'package:tapcart/presentation/widget/qr_scanner_overlay.dart';
 
 class SellerScanPage extends StatefulWidget {
@@ -69,6 +70,11 @@ class _SellerScanPageState extends State<SellerScanPage> {
                   ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(content: Text(code)));
                   debugPrint('Barcode found! $code');
+                  Navigator.pushNamed(
+                      context,
+                      SELLER_SCAN_CART_PAGE,
+                      arguments: code
+                  );
                 }
               }
             ),
