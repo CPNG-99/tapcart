@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:tapcart/presentation/pages/seller/seller_home_page.dart';
-import 'package:tapcart/presentation/pages/seller/seller_scan_page.dart';
+import 'package:tapcart/presentation/pages/seller/home/seller_home_page.dart';
+import 'package:tapcart/presentation/pages/seller/profile/seller_profile_page.dart';
+import 'package:tapcart/presentation/pages/seller/scan/seller_scan_page.dart';
 import 'package:tapcart/presentation/widget/seller_bottom_navbar.dart';
 
 class SellerPage extends StatefulWidget {
@@ -17,11 +18,9 @@ class _SellerPageState extends State<SellerPage> {
     SellerHomePage(),
     SellerScanPage(),
     Center(
-      child: Text("HISTORY"),
+      child: Text("COMING SOON"),
     ),
-    Center(
-      child: Text("BOOKMARK"),
-    ),
+    SellerProfilePage(),
   ];
 
   void _onTapNavItem(int idx) {

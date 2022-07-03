@@ -3,6 +3,7 @@
 const HOME_ROUTE = "/home";
 const BUYER_PAGE = "/buyer-page";
 const SELLER_PAGE = "/seller-page";
+const SELLER_EDIT_PROFILE_PAGE = "/seller-edit-profile-page";
 const LOGIN_SELLER_PAGE = "/login-seller-page";
 const PRODUCT_DETAIL_PAGE = "/product-detail-page";
 const PRODUCT_CREATE_PAGE = "/product-create-page";

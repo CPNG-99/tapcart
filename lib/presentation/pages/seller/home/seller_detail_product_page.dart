@@ -6,7 +6,7 @@ import 'package:tapcart/common/constants.dart';
 import 'package:tapcart/common/routes.dart';
 import 'package:tapcart/presentation/bloc/product/delete_product/delete_product_bloc.dart';
 
-import '../../../domain/entities/product/product.dart';
+import '../../../../domain/entities/product/product.dart';
 
 class SellerDetailProductPage extends StatefulWidget {
   final Product product;
