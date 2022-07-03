@@ -1,9 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:tapcart/domain/entities/store/store.dart';
 
-class SellerProfileQrPage extends StatefulWidget{
+class SellerProfileQrPage extends StatefulWidget {
   final Store store;
-  const SellerProfileQrPage({Key? key,required this.store}) : super(key: key);
+  const SellerProfileQrPage({Key? key, required this.store}) : super(key: key);
 
   @override
   State<SellerProfileQrPage> createState() => _SellerProfileQrPageState();
@@ -12,11 +14,11 @@ class SellerProfileQrPage extends StatefulWidget{
 class _SellerProfileQrPageState extends State<SellerProfileQrPage> {
   @override
   Widget build(BuildContext context) {
-    final UriData? base64Image = Uri.parse(widget.store.qrCode).data;
-    final image = base64Image?.contentAsBytes();
+    final _image = base64Decode(widget.store.qrCode);
+
     return Scaffold(
       appBar: AppBar(
-        title: Text("Profile Qr"),
+        title: const Text("Profile Qr"),
         centerTitle: true,
       ),
       body: Center(
@@ -28,12 +30,11 @@ class _SellerProfileQrPageState extends State<SellerProfileQrPage> {
               width: 300,
               decoration: BoxDecoration(
                 borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(5),
-                    topRight: Radius.circular(5)),
+                    topLeft: Radius.circular(5), topRight: Radius.circular(5)),
                 image: DecorationImage(
                   alignment: Alignment.center,
                   fit: BoxFit.fill,
-                  image: MemoryImage(image!),
+                  image: MemoryImage(_image),
                 ),
               ),
             ),
