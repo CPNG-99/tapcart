@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:tapcart/common/constants.dart';
 import 'package:tapcart/common/routes.dart';
@@ -15,8 +18,7 @@ class SellerCardProduct extends StatefulWidget {
 class _SellerCardProductState extends State<SellerCardProduct> {
   @override
   Widget build(BuildContext context) {
-    final UriData? base64Image = Uri.parse(widget.product.image ?? "").data;
-    final image = base64Image?.contentAsBytes();
+    final _image = base64Decode(widget.product.image ?? "");
 
     return InkWell(
       onTap: () {
@@ -42,14 +44,14 @@ class _SellerCardProductState extends State<SellerCardProduct> {
                       topLeft: Radius.circular(5),
                       topRight: Radius.circular(5)),
                   image: DecorationImage(
-                    alignment: Alignment.center,
-                    fit: BoxFit.cover,
-                    image: MemoryImage(image!)
-                  ),
+                      alignment: Alignment.center,
+                      fit: BoxFit.cover,
+                      image: MemoryImage(_image)),
+                  // image: NetworkImage(widget.product.image ?? "")),
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Padding(
