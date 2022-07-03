@@ -6,8 +6,12 @@ class CreateProductModel extends Equatable {
 
   const CreateProductModel(this._createDTO);
 
-  Map<String, dynamic> toJson() =>
-      {"product_name": _createDTO.productName, "image": _createDTO.image, "price": _createDTO.price, "is_available": _createDTO.isAvailable};
+  Map<String, dynamic> toJson() => {
+        "product_name": _createDTO.productName,
+        "price": _createDTO.price,
+        "is_available": _createDTO.isAvailable,
+        "image": _createDTO.image,
+      };
 
   @override
   List<Object?> get props => [_createDTO];

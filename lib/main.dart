@@ -12,6 +12,7 @@ import 'package:tapcart/presentation/bloc/auth/member_detail/member_detail_bloc.
 import 'package:tapcart/presentation/bloc/cart/purchase/purchase_bloc.dart';
 import 'package:tapcart/presentation/bloc/product/create_product/create_product_bloc.dart';
 import 'package:tapcart/presentation/bloc/product/productlist/product_list_bloc.dart';
+import 'package:tapcart/presentation/bloc/product/update_product/update_product_bloc.dart';
 import 'package:tapcart/presentation/bloc/store/storedetail/store_detail_bloc.dart';
 import 'package:tapcart/presentation/pages/buyer/buyer_detail_cart.dart';
 import 'package:tapcart/presentation/pages/buyer/buyer_merchant_page.dart';
@@ -38,12 +39,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        BlocProvider(create: (_) => di.locator<CreateProductBloc>()),
         BlocProvider(create: (_) => di.locator<LoginBloc>()),
         BlocProvider(create: (_) => di.locator<MemberDetailBloc>()),
         BlocProvider(create: (_) => di.locator<StoreDetailBloc>()),
         BlocProvider(create: (_) => di.locator<ProductListBloc>()),
         BlocProvider(create: (_) => di.locator<PurchaseBloc>()),
+        BlocProvider(create: (_) => di.locator<CreateProductBloc>()),
+        BlocProvider(create: (_) => di.locator<UpdateProductBloc>()),
       ],
       child: MaterialApp(
           title: 'TapCart',

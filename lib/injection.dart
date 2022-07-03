@@ -21,12 +21,14 @@ import 'package:tapcart/domain/usecases/auth/login.dart';
 import 'package:tapcart/domain/usecases/cart/submit_cart.dart';
 import 'package:tapcart/domain/usecases/product/create_product.dart';
 import 'package:tapcart/domain/usecases/product/get_product_list.dart';
+import 'package:tapcart/domain/usecases/product/update_product.dart';
 import 'package:tapcart/domain/usecases/store/get_store_detail.dart';
 import 'package:tapcart/presentation/bloc/auth/login/login_bloc.dart';
 import 'package:tapcart/presentation/bloc/auth/member_detail/member_detail_bloc.dart';
 import 'package:tapcart/presentation/bloc/cart/purchase/purchase_bloc.dart';
 import 'package:tapcart/presentation/bloc/product/create_product/create_product_bloc.dart';
 import 'package:tapcart/presentation/bloc/product/productlist/product_list_bloc.dart';
+import 'package:tapcart/presentation/bloc/product/update_product/update_product_bloc.dart';
 import 'package:tapcart/presentation/bloc/store/storedetail/store_detail_bloc.dart';
 
 final locator = GetIt.instance;
@@ -39,6 +41,7 @@ void init() {
   locator.registerFactory(() => ProductListBloc(locator()));
   locator.registerFactory(() => PurchaseBloc(locator()));
   locator.registerFactory(() => CreateProductBloc(locator()));
+  locator.registerFactory(() => UpdateProductBloc(locator()));
 
   // usecases
   locator.registerLazySingleton(() => Login(locator()));
@@ -47,6 +50,7 @@ void init() {
   locator.registerLazySingleton(() => GetProductList(locator()));
   locator.registerLazySingleton(() => CartPurchase(locator()));
   locator.registerLazySingleton(() => CreateProduct(locator()));
+  locator.registerLazySingleton(() => UpdateProduct(locator()));
 
   // repository
   locator.registerLazySingleton<AuthRepository>(
@@ -73,7 +77,7 @@ void init() {
   // helper
   locator.registerLazySingleton<DatabaseHelper>(() => DatabaseHelper());
   locator.registerLazySingleton<ProductCrudHelper>(
-          () => ProductCrudHelperImpl(locator()));
+      () => ProductCrudHelperImpl(locator()));
 
   // external
   locator.registerLazySingleton(() => http.Client());
