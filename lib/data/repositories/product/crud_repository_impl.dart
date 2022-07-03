@@ -24,4 +24,17 @@ class CrudRepositoryImpl implements CrudRepository {
       return const Left(ConnectionFailure(CONNECTION_FAILED));
     }
   }
+
+  @override
+  Future<Either<Failure, void>> updateProduct(
+      CreateDTO payload, String productId) async {
+    try {
+      final result = await productCrudHelper.update(payload, productId);
+      return Right(result);
+    } on ServerException {
+      return const Left(ServerFailure(""));
+    } on SocketException {
+      return const Left(ConnectionFailure(CONNECTION_FAILED));
+    }
+  }
 }

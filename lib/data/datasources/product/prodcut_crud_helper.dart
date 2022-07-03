@@ -9,6 +9,7 @@ import 'package:http/http.dart' as http;
 
 abstract class ProductCrudHelper {
   Future<void> create(CreateDTO payload);
+  Future<void> update(CreateDTO payload, String productId);
 }
 
 class ProductCrudHelperImpl implements ProductCrudHelper {
@@ -30,6 +31,26 @@ class ProductCrudHelperImpl implements ProductCrudHelper {
         body: jsonEncode(CreateProductModel(payload).toJson()));
 
     if (response.statusCode == 201) {
+      return;
+    } else {
+      throw ServerException();
+    }
+  }
+
+  @override
+  Future<void> update(CreateDTO payload, String productId) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    final token = pref.getString(ACCESS_TOKEN);
+    print(jsonEncode(CreateProductModel(payload).toJson()));
+    final response = await client.put(
+        Uri.parse("$BASE_URL/api/v1/products/$productId"),
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer $token"
+        },
+        body: jsonEncode(CreateProductModel(payload).toJson()));
+
+    if (response.statusCode == 200) {
       return;
     } else {
       throw ServerException();
