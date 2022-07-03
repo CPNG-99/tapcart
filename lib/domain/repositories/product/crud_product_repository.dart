@@ -6,4 +6,5 @@ abstract class CrudRepository {
   Future<Either<Failure, void>> createProduct(CreateDTO payload);
   Future<Either<Failure, void>> updateProduct(
       CreateDTO payload, String productId);
+  Future<Either<Failure, void>> deleteProduct(String productId);
 }

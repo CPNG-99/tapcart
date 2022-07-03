@@ -20,6 +20,7 @@ import 'package:tapcart/domain/usecases/auth/get_member_detail.dart';
 import 'package:tapcart/domain/usecases/auth/login.dart';
 import 'package:tapcart/domain/usecases/cart/submit_cart.dart';
 import 'package:tapcart/domain/usecases/product/create_product.dart';
+import 'package:tapcart/domain/usecases/product/delete_product.dart';
 import 'package:tapcart/domain/usecases/product/get_product_list.dart';
 import 'package:tapcart/domain/usecases/product/update_product.dart';
 import 'package:tapcart/domain/usecases/store/get_store_detail.dart';
@@ -27,6 +28,7 @@ import 'package:tapcart/presentation/bloc/auth/login/login_bloc.dart';
 import 'package:tapcart/presentation/bloc/auth/member_detail/member_detail_bloc.dart';
 import 'package:tapcart/presentation/bloc/cart/purchase/purchase_bloc.dart';
 import 'package:tapcart/presentation/bloc/product/create_product/create_product_bloc.dart';
+import 'package:tapcart/presentation/bloc/product/delete_product/delete_product_bloc.dart';
 import 'package:tapcart/presentation/bloc/product/productlist/product_list_bloc.dart';
 import 'package:tapcart/presentation/bloc/product/update_product/update_product_bloc.dart';
 import 'package:tapcart/presentation/bloc/store/storedetail/store_detail_bloc.dart';
@@ -42,6 +44,7 @@ void init() {
   locator.registerFactory(() => PurchaseBloc(locator()));
   locator.registerFactory(() => CreateProductBloc(locator()));
   locator.registerFactory(() => UpdateProductBloc(locator()));
+  locator.registerFactory(() => DeleteProductBloc(locator()));
 
   // usecases
   locator.registerLazySingleton(() => Login(locator()));
@@ -51,6 +54,7 @@ void init() {
   locator.registerLazySingleton(() => CartPurchase(locator()));
   locator.registerLazySingleton(() => CreateProduct(locator()));
   locator.registerLazySingleton(() => UpdateProduct(locator()));
+  locator.registerLazySingleton(() => DeleteProduct(locator()));
 
   // repository
   locator.registerLazySingleton<AuthRepository>(
