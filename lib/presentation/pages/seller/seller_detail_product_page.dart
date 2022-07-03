@@ -1,8 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tapcart/common/constants.dart';
 import 'package:tapcart/common/routes.dart';
+import 'package:tapcart/presentation/bloc/product/delete_product/delete_product_bloc.dart';
 
 import '../../../domain/entities/product/product.dart';
 
@@ -68,12 +70,12 @@ class _SellerDetailProductPageState extends State<SellerDetailProductPage> {
                   ),
                   Text(
                     widget.product.price.toString(),
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontSize: 22,
                         color: kLightBrown,
                         fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   Text(
@@ -84,14 +86,14 @@ class _SellerDetailProductPageState extends State<SellerDetailProductPage> {
                     "Snack",
                     style: kSubtitle,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   Text(
                     "Product Status",
                     style: kButtonText,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   isAvail
@@ -104,16 +106,16 @@ class _SellerDetailProductPageState extends State<SellerDetailProductPage> {
                                   });
                                 },
                                 style: ElevatedButton.styleFrom(
-                                    maximumSize: Size(170, 50)),
-                                child: Text("Available")),
-                            SizedBox(
+                                    maximumSize: const Size(170, 50)),
+                                child: const Text("Available")),
+                            const SizedBox(
                               width: 10,
                             ),
                             ElevatedButton(
                                 onPressed: null,
                                 style: ElevatedButton.styleFrom(
-                                    maximumSize: Size(170, 50)),
-                                child: Text("Unavailable"))
+                                    maximumSize: const Size(170, 50)),
+                                child: const Text("Unavailable"))
                           ],
                         )
                       : Row(
@@ -121,9 +123,9 @@ class _SellerDetailProductPageState extends State<SellerDetailProductPage> {
                             ElevatedButton(
                                 onPressed: null,
                                 style: ElevatedButton.styleFrom(
-                                    maximumSize: Size(170, 50)),
-                                child: Text("Available")),
-                            SizedBox(
+                                    maximumSize: const Size(170, 50)),
+                                child: const Text("Available")),
+                            const SizedBox(
                               width: 10,
                             ),
                             ElevatedButton(
@@ -133,18 +135,18 @@ class _SellerDetailProductPageState extends State<SellerDetailProductPage> {
                                   });
                                 },
                                 style: ElevatedButton.styleFrom(
-                                    maximumSize: Size(170, 50)),
-                                child: Text("Unavailable"))
+                                    maximumSize: const Size(170, 50)),
+                                child: const Text("Unavailable"))
                           ],
                         ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   Text(
                     "Manage Product",
                     style: kButtonText,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Row(
@@ -156,10 +158,10 @@ class _SellerDetailProductPageState extends State<SellerDetailProductPage> {
                           },
                           style: ElevatedButton.styleFrom(
                               primary: Colors.white,
-                              maximumSize: Size(170, 50)),
+                              maximumSize: const Size(170, 50)),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
+                            children: const [
                               Icon(
                                 Icons.edit,
                                 size: 18,
@@ -170,7 +172,7 @@ class _SellerDetailProductPageState extends State<SellerDetailProductPage> {
                               Text("Edit"),
                             ],
                           )),
-                      SizedBox(
+                      const SizedBox(
                         width: 10,
                       ),
                       ElevatedButton(
@@ -192,8 +194,14 @@ class _SellerDetailProductPageState extends State<SellerDetailProductPage> {
                                       ),
                                     ),
                                     TextButton(
-                                      onPressed: () =>
-                                          Navigator.pop(context, 'Delete'),
+                                      onPressed: () {
+                                        context.read<DeleteProductBloc>().add(
+                                            OnDeleteProductEvent(
+                                                widget.product.productId));
+                                        Navigator.pop(context, 'Delete');
+                                        Navigator.pushNamed(
+                                            context, SELLER_PAGE);
+                                      },
                                       child: Text(
                                         'Delete',
                                         style: kButtonText,
@@ -204,11 +212,11 @@ class _SellerDetailProductPageState extends State<SellerDetailProductPage> {
                               ),
                           style: ElevatedButton.styleFrom(
                             primary: Colors.white,
-                            maximumSize: Size(170, 50),
+                            maximumSize: const Size(170, 50),
                           ),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
+                            children: const [
                               Icon(
                                 Icons.delete,
                                 size: 18,

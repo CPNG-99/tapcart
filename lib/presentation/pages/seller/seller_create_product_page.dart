@@ -10,11 +10,12 @@ import 'package:tapcart/common/routes.dart';
 import 'package:tapcart/domain/entities/product/createDTO.dart';
 import 'package:tapcart/presentation/bloc/product/create_product/create_product_bloc.dart';
 
-class SellerCreateProductPage extends StatefulWidget{
+class SellerCreateProductPage extends StatefulWidget {
   const SellerCreateProductPage({Key? key}) : super(key: key);
 
   @override
-  State<SellerCreateProductPage> createState() => _SellerCreateProductPageState();
+  State<SellerCreateProductPage> createState() =>
+      _SellerCreateProductPageState();
 }
 
 class _SellerCreateProductPageState extends State<SellerCreateProductPage> {
@@ -25,22 +26,25 @@ class _SellerCreateProductPageState extends State<SellerCreateProductPage> {
   final _nameProductController = TextEditingController();
   final _priceController = TextEditingController();
 
-  void _createProduct(productName, image, price, isAvailable){
-    CreateDTO payload = CreateDTO(productName: productName, image: image, price: int.parse(price), isAvailable: isAvailable);
+  void _createProduct(productName, image, price, isAvailable) {
+    CreateDTO payload = CreateDTO(
+        productName: productName,
+        image: image,
+        price: int.parse(price),
+        isAvailable: isAvailable);
     context.read<CreateProductBloc>().add(OnCreateProductEvent(payload));
-
   }
 
   Future pickImage() async {
     try {
       final image = await ImagePicker().pickImage(source: ImageSource.gallery);
-      
+
       if (image == null) return;
       final temporaryImage = File(image.path);
 
       Uint8List imageBytes = await temporaryImage.readAsBytes();
 
-      setState((){
+      setState(() {
         base64string = base64.encode(imageBytes);
         this.image = temporaryImage;
       });
@@ -48,6 +52,7 @@ class _SellerCreateProductPageState extends State<SellerCreateProductPage> {
       print("Failed to load image:$e");
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,59 +71,61 @@ class _SellerCreateProductPageState extends State<SellerCreateProductPage> {
                 children: [
                   AspectRatio(
                     aspectRatio: 487 / 451,
-                    child:
-                    image!=null
+                    child: image != null
                         ? Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(color: kGreySoft),
-                        borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(5),
-                            topRight: Radius.circular(5)),
-                        image: DecorationImage(
-                          alignment: Alignment.center,
-                          fit: BoxFit.cover,
-                          image: FileImage(
-                            image!,
-                          ),
-                        ),
-                      ),
-                    )
+                            decoration: BoxDecoration(
+                              border: Border.all(color: kGreySoft),
+                              borderRadius: const BorderRadius.only(
+                                  topLeft: Radius.circular(5),
+                                  topRight: Radius.circular(5)),
+                              image: DecorationImage(
+                                alignment: Alignment.center,
+                                fit: BoxFit.cover,
+                                image: FileImage(
+                                  image!,
+                                ),
+                              ),
+                            ),
+                          )
                         : Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(color: kGreySoft),
-                        borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(5),
-                            topRight: Radius.circular(5)),
-                        image: const DecorationImage(
-                          alignment: Alignment.center,
-                          fit: BoxFit.fill,
-                          image: AssetImage(
-                              "assets/img/tapcart-medium.png"
+                            decoration: BoxDecoration(
+                              border: Border.all(color: kGreySoft),
+                              borderRadius: const BorderRadius.only(
+                                  topLeft: Radius.circular(5),
+                                  topRight: Radius.circular(5)),
+                              image: const DecorationImage(
+                                alignment: Alignment.center,
+                                fit: BoxFit.fill,
+                                image:
+                                    AssetImage("assets/img/tapcart-medium.png"),
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                    ),
                   ),
                   Center(
                     child: ElevatedButton(
                         onPressed: () => pickImage(),
                         style: ElevatedButton.styleFrom(
-                            fixedSize: const Size(120, 30)
-                        ),
+                            fixedSize: const Size(120, 30)),
                         child: const Text(
-                          "Add Photo", style: TextStyle(fontSize: 10),
-                        )
-                    ),
+                          "Add Photo",
+                          style: TextStyle(fontSize: 10),
+                        )),
                   ),
-                  Text("Name", style: kButtonText,),
-                  const SizedBox(height: 10,),
+                  Text(
+                    "Name",
+                    style: kButtonText,
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
                   TextFormField(
                     controller: _nameProductController,
                     cursorColor: Colors.grey,
                     cursorHeight: 20,
                     keyboardType: TextInputType.name,
                     validator: (value) {
-                      if(value!.isEmpty){
+                      if (value!.isEmpty) {
                         return "This field cannot be empty";
                       }
                       return null;
@@ -127,16 +134,23 @@ class _SellerCreateProductPageState extends State<SellerCreateProductPage> {
                       hintText: "Product Name",
                     ),
                   ),
-                  const SizedBox(height: 10,),
-                  Text("Price", style: kButtonText,),
-                  const SizedBox(height: 10,),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    "Price",
+                    style: kButtonText,
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
                   TextFormField(
                     controller: _priceController,
                     cursorColor: Colors.grey,
                     cursorHeight: 20,
                     keyboardType: TextInputType.number,
                     validator: (value) {
-                      if(value!.isEmpty){
+                      if (value!.isEmpty) {
                         return "This field cannot be empty";
                       }
                       return null;
@@ -145,76 +159,73 @@ class _SellerCreateProductPageState extends State<SellerCreateProductPage> {
                       hintText: "Price",
                     ),
                   ),
-                  const SizedBox(height: 10,),
-                  Text("Product Status", style: kButtonText,),
-                  const SizedBox(height: 10,),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    "Product Status",
+                    style: kButtonText,
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
                   isAvail
                       ? Row(
-                    children: [
-                      ElevatedButton(
-                          onPressed: (){
-                            setState((){
-                              isAvail = !isAvail;
-                            });
-                          },
-                          style: ElevatedButton.styleFrom(
-                              maximumSize: const Size(170, 50)
-                          ),
-                          child: const Text(
-                              "Available"
-                          )
-                      ),
-                      const SizedBox(width: 10,),
-                      ElevatedButton(
-                          onPressed: null,
-                          style: ElevatedButton.styleFrom(
-                              maximumSize: const Size(170, 50)
-                          ),
-                          child: const Text(
-                              "Unavailable"
-                          )
-                      )
-                    ],
-                  )
+                          children: [
+                            ElevatedButton(
+                                onPressed: () {
+                                  setState(() {
+                                    isAvail = !isAvail;
+                                  });
+                                },
+                                style: ElevatedButton.styleFrom(
+                                    maximumSize: const Size(170, 50)),
+                                child: const Text("Available")),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            ElevatedButton(
+                                onPressed: null,
+                                style: ElevatedButton.styleFrom(
+                                    maximumSize: const Size(170, 50)),
+                                child: const Text("Unavailable"))
+                          ],
+                        )
                       : Row(
-                    children: [
-                      ElevatedButton(
-                          onPressed: null,
-                          style: ElevatedButton.styleFrom(
-                              maximumSize: const Size(170, 50)
-                          ),
-                          child: const Text(
-                              "Available"
-                          )
-                      ),
-                      const SizedBox(width: 10,),
-                      ElevatedButton(
-                          onPressed: (){
-                            setState((){
-                              isAvail = !isAvail;
-                            });
-                          },
-                          style: ElevatedButton.styleFrom(
-                              maximumSize: const Size(170, 50)
-                          ),
-                          child: const Text(
-                              "Unavailable"
-                          )
-                      )
-                    ],
+                          children: [
+                            ElevatedButton(
+                                onPressed: null,
+                                style: ElevatedButton.styleFrom(
+                                    maximumSize: const Size(170, 50)),
+                                child: const Text("Available")),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            ElevatedButton(
+                                onPressed: () {
+                                  setState(() {
+                                    isAvail = !isAvail;
+                                  });
+                                },
+                                style: ElevatedButton.styleFrom(
+                                    maximumSize: const Size(170, 50)),
+                                child: const Text("Unavailable"))
+                          ],
+                        ),
+                  const SizedBox(
+                    height: 80,
                   ),
-                  const SizedBox(height: 80,),
                   ElevatedButton(
-                    onPressed: (){
-                      if (_formKey.currentState!.validate()) {
-                        _createProduct(_nameProductController.text, base64string, _priceController.text, isAvail);
-                        Navigator.pushNamed(context, SELLER_PAGE);
-                      }
-                    },
-                    child: const Text(
-                        "Add Product"
-                    )
-                  )
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          _createProduct(_nameProductController.text,
+                              base64string, _priceController.text, isAvail);
+                          Future.delayed(const Duration(milliseconds: 500), () {
+                            Navigator.pushNamed(context, SELLER_PAGE);
+                          });
+                        }
+                      },
+                      child: const Text("Add Product"))
                 ],
               ),
             ),

@@ -11,6 +11,7 @@ import 'package:tapcart/presentation/bloc/auth/login/login_bloc.dart';
 import 'package:tapcart/presentation/bloc/auth/member_detail/member_detail_bloc.dart';
 import 'package:tapcart/presentation/bloc/cart/purchase/purchase_bloc.dart';
 import 'package:tapcart/presentation/bloc/product/create_product/create_product_bloc.dart';
+import 'package:tapcart/presentation/bloc/product/delete_product/delete_product_bloc.dart';
 import 'package:tapcart/presentation/bloc/product/productlist/product_list_bloc.dart';
 import 'package:tapcart/presentation/bloc/product/update_product/update_product_bloc.dart';
 import 'package:tapcart/presentation/bloc/store/storedetail/store_detail_bloc.dart';
@@ -46,6 +47,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (_) => di.locator<PurchaseBloc>()),
         BlocProvider(create: (_) => di.locator<CreateProductBloc>()),
         BlocProvider(create: (_) => di.locator<UpdateProductBloc>()),
+        BlocProvider(create: (_) => di.locator<DeleteProductBloc>()),
       ],
       child: MaterialApp(
           title: 'TapCart',
