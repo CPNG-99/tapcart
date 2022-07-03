@@ -12,7 +12,6 @@ abstract class ProductCrudHelper {
 }
 
 class ProductCrudHelperImpl implements ProductCrudHelper {
-
   static const BASE_URL = "https://api-tapcart.herokuapp.com";
 
   final http.Client client;
@@ -23,8 +22,11 @@ class ProductCrudHelperImpl implements ProductCrudHelper {
   Future<void> create(CreateDTO payload) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     final token = pref.getString(ACCESS_TOKEN);
-    final response = await client.post(Uri.parse("$BASE_URL/auth/v1/products"),
-        headers: {"Authorization": "Bearer $token"},
+    final response = await client.post(Uri.parse("$BASE_URL/api/v1/products"),
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer $token"
+        },
         body: jsonEncode(CreateProductModel(payload).toJson()));
 
     if (response.statusCode == 201) {
@@ -33,5 +35,4 @@ class ProductCrudHelperImpl implements ProductCrudHelper {
       throw ServerException();
     }
   }
-
 }
